@@ -1,0 +1,52 @@
+.selectmenu {
+  position: absolute;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 32vh;
+  top: 1.5vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.selectmenu .btn {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 5vh;
+  margin-top: 0.5vh;
+  margin-bottom: 1vh;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: var(--dark2);
+}
+.selectmenu .btn.not-interactable .title {
+  position: absolute;
+  top: -1.2vh;
+}
+.selectmenu .btn.not-interactable:hover {
+  cursor: default;
+  background-color: var(--dark2);
+}
+.selectmenu .btn .title {
+  color: var(--white);
+  position: absolute;
+  text-align: center;
+  width: 15vh;
+  top: -0.3vh;
+  left: 50%;
+  transform: translate(-50%);
+  font-size: 1.8vh;
+}
+.selectmenu .btn .extra {
+  color: rgb(167, 167, 167);
+  position: absolute;
+  text-align: center;
+  width: 30vh;
+  top: 1.2vh;
+  left: 50%;
+  transform: translate(-50%);
+  font-size: 1.4vh;
+}
+.selectmenu .btn:hover {
+  cursor: pointer;
+  background-color: var(--dark3);
+}

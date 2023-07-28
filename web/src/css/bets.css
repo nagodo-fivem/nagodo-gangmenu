@@ -1,0 +1,65 @@
+.bets {
+  position: absolute;
+  height: 44vh;
+  width: 32vh;
+  overflow: auto;
+  top: 14vh;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top: var(--dark2) solid 0.4vh;
+  padding-top: 0.8vh;
+}
+.bets .bet {
+  position: relative;
+  display: flex;
+  margin-bottom: 0.8vh;
+  background-color: var(--dark2);
+  height: 4vh;
+  width: 100%;
+}
+.bets .bet .name {
+  color: var(--white);
+  position: absolute;
+  top: -0.5vh;
+  left: 1vh;
+  width: 18vh;
+  font-size: 1.5vh;
+}
+.bets .bet .amount {
+  color: var(--white);
+  position: absolute;
+  top: -0.5vh;
+  right: 1vh;
+  text-align: right;
+  width: 11vh;
+  font-size: 1.5vh;
+}
+.bets .bet i {
+  margin-right: 0.4vh;
+}
+.bets .bet.green {
+  background-color: rgb(21, 94, 21);
+}
+.bets .bet.red {
+  background-color: rgb(128, 16, 16);
+}
+.bets .placebetbtn {
+  position: relative;
+  display: flex;
+  margin-bottom: 0.8vh;
+  background-color: var(--dark2);
+  height: 4vh;
+  width: 100%;
+}
+.bets .placebetbtn .title {
+  color: var(--white);
+  position: absolute;
+  top: -0.5vh;
+  left: 1vh;
+  width: 18vh;
+  font-size: 1.5vh;
+}
+.bets .placebetbtn:hover {
+  cursor: pointer;
+  background-color: var(--dark3);
+}
