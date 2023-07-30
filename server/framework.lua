@@ -9,20 +9,4 @@ Citizen.CreateThread(function()
         
     end
 
-    function GetPlayerCash()
-
-    end
-
-    function GetPlayerBankMoney()
-
-    end
-
-    function RemovePlayerCash()
-
-    end
-
-    function RemovePlayerBankMoney()
-
-    end
-
 end)
