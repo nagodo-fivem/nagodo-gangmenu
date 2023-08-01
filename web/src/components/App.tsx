@@ -3,9 +3,11 @@ import '../css/App.css';
 import { fetchNui } from "../utils/fetchNui";
 import { useNuiEvent } from "../hooks/useNuiEvent";
 
+import { GangMenu } from './menu/gangmenu';
+
 
 const App: React.FC = () => {
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
     
     //NUI Hooks
     useNuiEvent<any>('open', (data) => {
@@ -34,7 +36,7 @@ const App: React.FC = () => {
     
     return (
         <div className="App">
-            
+            <GangMenu />
         </div>
     );
   
