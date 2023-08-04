@@ -1,25 +1,29 @@
 * {
-    --navItemAmount: 3;
+    --navItemAmount: 2;
 }
 
 .navigation {
-    background-color: red;
+    background-color: var(--dark1);
 
     position: absolute;
 
-    width: 100%;
-    height: 10vh;
-
+    width: 43vh;
+    height: 6vh;
+    
+    margin-top: 1vh;
+   
     display: flex;
+    
 
+    left: 50%;
+    transform: translateX(-50%);
 
     .nav-item {
-        background-color: blue;
-
         position: relative;
 
         width: calc(100% / var(--navItemAmount));
-        height: 10vh;
+        height: 100%;
+    
 
         .icon {
             color: var(--white);
@@ -30,7 +34,12 @@
 
             transform: translate(-50%, -50%);
 
-            font-size: 3vh;
+            font-size: 2.4vh;
+        }
+
+        &:hover {
+            background-color: var(--dark2);
+            cursor: pointer;
         }
     }
 }

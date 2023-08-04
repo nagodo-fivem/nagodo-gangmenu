@@ -7,7 +7,8 @@ import { GangMenu } from './menu/gangmenu';
 
 
 const App: React.FC = () => {
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
+    const [currentPage, setCurrentPage] = useState('roles');
     
     //NUI Hooks
     useNuiEvent<any>('open', (data) => {
@@ -36,7 +37,7 @@ const App: React.FC = () => {
     
     return (
         <div className="App">
-            <GangMenu />
+            <GangMenu currentPage = {currentPage} setCurrentPage = {setCurrentPage}/>
         </div>
     );
   

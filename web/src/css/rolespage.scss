@@ -1,0 +1,239 @@
+.roles {
+    border-top: solid 0.4vh var(--dark2);
+
+    width: 100%;
+    height: 100%;
+
+    overflow: auto;
+
+    .role {
+        position: relative;
+
+        width: 100%;
+        height: 7vh;
+
+        background-color: var(--dark2);
+
+        margin-top: 0.5vh;
+        margin-bottom: 0.5vh;
+
+        .info {
+            position: absolute;            
+            left: 1vh;
+
+            &.name {
+                color: var(--white);
+                font-size: 1.8vh;
+                top: -1vh;
+            }
+
+            &.extra {
+                color: var(--gray);
+                font-size: 1.5vh;
+                top: 1.5vh;
+            }
+        }
+
+        .edit-btn {
+            position: absolute;
+
+            width: fit-content;
+            height: fit-content;
+
+            right: 2vh;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            i {
+                color: var(--gray);
+            
+                font-size: 3vh;
+
+                &:hover {
+                    color: var(--white);
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+
+    .loading {
+        position: relative;
+
+        width: 100%;
+        height: 7vh;
+
+        background-color: var(--dark2);
+
+        margin-top: 0.5vh;
+        margin-bottom: 0.5vh;
+
+        p {
+            position: absolute;
+
+            color: var(--white);
+
+            font-size: 2vh;
+            top: 0.3vh;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+}
+
+.role-editing {
+    border-top: solid 0.4vh var(--dark2);
+
+    width: 100%;
+    height: 100%;
+
+    .editor {
+        width: 100%;
+        height: 100%;
+        
+        .current-edit {
+            position: relative;
+    
+            width: 100%;
+            height: 7vh;
+    
+            background-color: var(--dark2);
+    
+            margin-top: 0.5vh;
+            margin-bottom: 0.5vh;
+    
+            .info {
+                position: absolute;            
+                left: 1vh;
+    
+                &.name {
+                    color: var(--white);
+                    font-size: 1.8vh;
+                    top: -1vh;
+                }
+    
+            }
+        }
+
+        .name-changer {
+            position: relative;
+    
+            margin-top: 0.5vh;
+    
+            width: 100%;
+            height: 5vh;
+            
+        }
+
+        .permission-changer {
+            position: relative;
+    
+            margin-top: 0.5vh;
+    
+            width: 100%;
+            height: 40vh;
+
+            .changer {
+                width: 100%;
+                height: 100%;
+
+                overflow: auto;
+
+                .permission {
+                    position: relative;
+
+                    width: 100%;
+                    height: 5vh;
+
+                    margin-bottom: 0.5vh;
+
+                    background-color: var(--dark2);
+
+                    .text {
+                        position: absolute;
+                       
+                        font-size: 1.7vh;
+                        top: -0.2vh;
+                        left: 5vh;
+                        color: var(--white);
+                    }
+                }
+
+                .loading {
+                    position: relative;
+            
+                    width: 100%;
+                    height: 5vh;
+            
+                    margin-bottom: 0.5vh;
+
+                    background-color: var(--dark2);
+            
+                    p {
+                        position: absolute;
+                       
+                        font-size: 1.7vh;
+                        top: -0.2vh;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        color: var(--white);
+                    }
+                }
+
+            }
+            
+        }
+
+        .main-btns {
+            position: absolute;
+    
+            width: fit-content;
+            height: 4vh;
+    
+            bottom: 1vh;
+            left: 50%;
+            transform: translateX(-50%);
+    
+            display: flex;
+    
+            .btn {
+                position: relative;
+    
+                width: 12vh;
+                height: 100%;
+    
+                margin-left: 0.5vh;
+                margin-right: 0.5vh;
+    
+                border-radius: 0.5vh;
+    
+                &.save {
+                    background-color: var(--green);
+                }
+
+                &.cancel {
+                    background-color: var(--red);
+                }
+    
+                &:hover {
+                    cursor: pointer;
+                }
+    
+                p {
+                    color: var(--white);
+                    font-size: 1.7vh;
+                    position: absolute;
+    
+                    top: -0.5vh;
+                    text-align: center;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+
+    }
+
+}

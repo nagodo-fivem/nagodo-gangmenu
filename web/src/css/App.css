@@ -1,9 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 * {
   --white: #ececec;
+  --gray: rgb(136, 136, 136);
   --dark1: rgb(40, 40, 40);
   --dark2: rgb(55, 55, 55);
   --dark3: rgb(65, 65, 65);
+  --red: rgb(150, 0, 0);
+  --green: rgb(5, 94, 5);
   font-family: "Roboto", sans-serif;
 }
 

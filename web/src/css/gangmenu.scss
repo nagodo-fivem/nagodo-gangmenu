@@ -6,6 +6,8 @@
     width: 45vh;
     height: 70vh;
 
+    border-radius: 0.8vh;
+
     top: 50%;
     left: 50%;
 
@@ -14,12 +16,27 @@
     .menu-content {
         position: absolute;
 
-        background-color: red;
+        background-color: var(--dark1);
 
         width: 100%;
-        height: 60vh;
+        height: 63vh;
 
         bottom: 0vh;
+
+        border-bottom-left-radius: 0.8vh;
+        border-bottom-right-radius: 0.8vh;
+
+        .content {
+            position: absolute;
+
+            width: 43vh;
+            height: 62vh;
+
+            bottom: 1vh;
+            left: 50%;
+
+            transform: translateX(-50%);
+        }
     }
 }
 

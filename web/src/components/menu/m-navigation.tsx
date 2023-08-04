@@ -1,25 +1,37 @@
+import React, { MouseEventHandler } from 'react';
 import '../../css/navigation.css'
 
 interface NavigationItemProps {
-
+    name: string;
+    icon: string;
+    setCurrentPage: Function;
 }
 
 function NavigationItem(props: NavigationItemProps) {
+    
+    function handleClick(name: string){
+        props.setCurrentPage(name);
+    }
+    
     return (
-        <div className='nav-item'>
-            <i className="fa-solid fa-user icon"></i>
+        <div className='nav-item' onClick = {() => {handleClick(props.name)}}>
+            <i className= {"icon " + props.icon}></i>
         </div>
     )
 }
 
+interface NavigationProps {
+    setCurrentPage: Function;
+}
 
-export function Navigation() {
+export function Navigation(props: NavigationProps) {
 
+    
     return (
         <div className="navigation">
-            <NavigationItem />
-            <NavigationItem />
-            <NavigationItem />
+            <NavigationItem name = "members" icon = "fa-solid fa-people-group" setCurrentPage={props.setCurrentPage} />
+            <NavigationItem name = "roles" icon = "fa-brands fa-windows" setCurrentPage={props.setCurrentPage}/>
+            
         </div>
     );
 }
