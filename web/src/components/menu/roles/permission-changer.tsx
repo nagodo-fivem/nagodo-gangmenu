@@ -10,6 +10,12 @@ function LoadingPermissions() {
     )
 }
 
+export interface Permission {
+    identifier: string;
+    label: string;
+    enabled: boolean;
+}
+
 interface PermissionProps {
     name: string;
     checked: boolean;
@@ -24,25 +30,13 @@ function Permission(props: PermissionProps) {
     )
 }
 
-interface IPermission {
-    name: string;
-    checked: boolean;
+interface PermissionChangerProps {
+    permissions: Permission[];
 }
 
-export function PermissionChanger() {
-    const [permissions, setPermissions] = useState<IPermission[]>([{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false}]);
+export function PermissionChanger(props: PermissionChangerProps) {
+    const [permissions, setPermissions] = useState<Permission[]>([{identifier: "accessvault", label: 'Tilgå lager', enabled: false}]);
 
-    async function fetchPermissions() {
-        fetchNui<any>('fetchPermissions', {}).then(
-            (response) => {
-                setPermissions(response);
-            }
-        );
-    }
-
-    useEffect(() => {
-        fetchPermissions();
-    }, [])
 
     if (permissions === undefined || permissions === null || permissions.length === 0) {
         return (
@@ -55,7 +49,7 @@ export function PermissionChanger() {
     return (
         <div className="changer">
             {permissions.map((permission) => (
-                <Permission name = {permission.name} checked = {permission.checked} />
+                <Permission name = {permission.label} checked = {permission.enabled} />
             ))}
         </div>
     )

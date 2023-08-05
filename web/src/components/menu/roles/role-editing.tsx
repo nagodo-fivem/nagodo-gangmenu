@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { NameChanger } from './name-changer';
 import { PermissionChanger } from './permission-changer';
+import { Permission }  from './permission-changer';
 import { fetchNui } from "../../../utils/fetchNui";
 
 interface RoleData {
     id: number;
     name: string;
-    permissions: string[];
+    permissions: Permission[];
 }
 
 interface RoleEditingProps {
@@ -16,10 +17,10 @@ interface RoleEditingProps {
 }
 
 export function RoleEditing(props: RoleEditingProps) {
-    const [roleData, setRoleData] = useState<RoleData>();
+    const [roleData, setRoleData] = useState<RoleData>({id: 1, name: "Præsident", permissions: []});
 
     async function fetchRole(role_id: number) {
-        fetchNui<any>('fetchRole', {role_id}).then(
+        fetchNui<any>('fetchRoleData', {role_id}).then(
             (response) => {
                 
             }
@@ -33,7 +34,7 @@ export function RoleEditing(props: RoleEditingProps) {
     return (
         <div className='editor'>
             <div className="current-edit">
-                <p className="info name">Editing: Præsident</p>
+                <p className="info name">Editing: {roleData.name}</p>
             </div>
 
             <div className='name-changer'>
@@ -41,7 +42,7 @@ export function RoleEditing(props: RoleEditingProps) {
             </div>
 
             <div className='permission-changer'>
-                <PermissionChanger />
+                <PermissionChanger permissions = {roleData.permissions} />
             </div>
 
             <div className = "main-btns">
