@@ -24,11 +24,11 @@ export function RankSelector() {
     const [options, setOptions] = useState<IOption[]>([{id: 1, name: 'Præsident'}, {id: 2, name: 'Vicepræsident'}, {id: 3, name: 'Sekretær'}, {id: 4, name: 'Kasserer'}, {id: 5, name: 'Medlem'}, {id: 6, name: 'Prospect'}, {id: 7, name: 'Supporter'}]);
     const [open, setOpen] = useState(false);
 
-    function HandleSelectorClick() {
+    function handleSelectorClick() {
         setOpen(!open);
     }
 
-    function HandleOptionClick(id: number) {
+    function handleOptionClick(id: number) {
         let option = options.find((option) => {
             return option.id === id;
         })
@@ -39,14 +39,14 @@ export function RankSelector() {
         }
     }
 
-    async function FetchOptions() {
+    async function fetchOptions() {
 
     }
 
     function Header(props: {open: boolean}) {
         let arrow = props.open ? "fa-solid fa-chevron-up": "fa-solid fa-chevron-down";
         return (
-            <div className='header' onClick={() => {HandleSelectorClick()}}>
+            <div className='header' onClick={() => {handleSelectorClick()}}>
                 <p className='selected-rank'>{selectedRank}</p>
                 <div className='arrow'>
                    <i className = {arrow}></i>
@@ -56,7 +56,7 @@ export function RankSelector() {
     }
 
     useEffect(() => {
-        FetchOptions();
+        fetchOptions();
     }, [])
 
     if (options === undefined || options === null || options.length === 0) {
@@ -74,7 +74,7 @@ export function RankSelector() {
                 <div className='options'>
                     {options.map((option) => {
                         return (
-                            <Option id= {option.id} name={option.name} onClick = {HandleOptionClick} />
+                            <Option id= {option.id} name={option.name} onClick = {handleOptionClick} />
                         )
                     })}
                 </div>

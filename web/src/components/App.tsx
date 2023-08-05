@@ -7,21 +7,21 @@ import { GangMenu } from './menu/gangmenu';
 
 
 const App: React.FC = () => {
-    const [show, setShow] = useState(true);
-    const [currentPage, setCurrentPage] = useState('roles');
+    const [show, setShow] = useState(false);
+    const [currentPage, setCurrentPage] = useState('members');
     
     //NUI Hooks
-    useNuiEvent<any>('open', (data) => {
+    useNuiEvent<boolean>('open', (data) => {
         setShow(true);
     });
 
     const keyHandler = (e: KeyboardEvent) => {
         if (["Escape"].includes(e.code)) { 
-            EscapePressed();          
+            escapePressed();          
         }
     }
 
-    function EscapePressed() {
+    function escapePressed() {
         fetchNui<string>('close', {}).then(
             (response) => {
                 setShow(false);

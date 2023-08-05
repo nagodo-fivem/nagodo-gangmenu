@@ -120,10 +120,42 @@
         .name-changer {
             position: relative;
     
-            margin-top: 0.5vh;
+            margin-top: 1vh;
     
             width: 100%;
-            height: 5vh;
+            height: 7vh;
+
+            .changer {
+                width: 100%;
+                height: 100%;
+                background-color: var(--dark2);
+
+                .name {
+                    position: absolute;
+                    font-size: 1.8vh;
+                    color: var(--white);
+                    left: 1vh;
+                    top: -0.8vh;
+                }
+
+                input {
+                    position: absolute;
+                    width: 30vh;
+                    height: 3vh;
+
+                    left: 1vh;
+                    bottom: 0.5vh;
+
+                    background-color: var(--dark3);
+
+                    border: none;
+                    outline: none;
+
+                    color: var(--white);
+                    font-size: 1.7vh;
+                    padding: 0;
+                }
+            }
             
         }
 
@@ -133,11 +165,13 @@
             margin-top: 0.5vh;
     
             width: 100%;
-            height: 40vh;
+            height: 39.5vh;
 
             .changer {
+                position: absolute;
+                bottom: 0vh;
                 width: 100%;
-                height: 100%;
+                height: 38vh;
 
                 overflow: auto;
 

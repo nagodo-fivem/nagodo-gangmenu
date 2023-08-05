@@ -30,9 +30,9 @@ interface IPermission {
 }
 
 export function PermissionChanger() {
-    const [permissions, setPermissions] = useState<IPermission[]>([{name: 'Tilgå lager', checked: false}]);
+    const [permissions, setPermissions] = useState<IPermission[]>([{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false},{name: 'Tilgå lager', checked: false}]);
 
-    async function FetchPermissions() {
+    async function fetchPermissions() {
         fetchNui<any>('fetchPermissions', {}).then(
             (response) => {
                 setPermissions(response);
@@ -41,7 +41,7 @@ export function PermissionChanger() {
     }
 
     useEffect(() => {
-        FetchPermissions();
+        fetchPermissions();
     }, [])
 
     if (permissions === undefined || permissions === null || permissions.length === 0) {

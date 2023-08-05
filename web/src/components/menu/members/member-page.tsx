@@ -18,12 +18,12 @@ interface IMember {
 }
 
 export function MembersPage() {
-    const [members, setMembers] = useState<IMember[]>([{name: 'John Olsen', rank: 'Præsident'}])
+    const [members, setMembers] = useState<IMember[]>([])
     const [editing, setEditing] = useState(false);
     const [editingData, setEditingData] = useState<MemberEditingData>();
 
-    async function FetchMembers() {
-        fetchNui<any>('fetchMembers', {}).then(
+    async function fetchMembers() {
+        fetchNui<any>('fetchMembers').then(
             (response) => {
                 setMembers(response);
             }
@@ -31,19 +31,19 @@ export function MembersPage() {
     }
 
     useEffect(() => {
-        FetchMembers();
+        fetchMembers();
     }, [])
 
-    function StartEditing(member_id: number) {
+    function startEditing(member_id: number) {
         
         setEditing(true);
     }
 
-    function StopEditing() {
+    function stopEditing() {
         setEditing(false);
     }
 
-    function SaveMember() {
+    function saveMember() {
         setEditing(false);
     }
 
@@ -58,7 +58,7 @@ export function MembersPage() {
     if (editing) {
         return (
             <div className="member-editing">
-                <MemberEditing stopEditing = {StopEditing} saveMember = {SaveMember}/>
+                <MemberEditing stopEditing = {stopEditing} saveMember = {saveMember}/>
             </div>
             
         )
@@ -66,18 +66,11 @@ export function MembersPage() {
 
     return (
         <div className="members">
-            <Member name = "John Olsen" rank = "Din mor" startEditing={StartEditing} />
-            <Member name = "John Olsen" rank = "Din mor" startEditing={StartEditing} />
-            <Member name = "John Olsen" rank = "Din mor" startEditing={StartEditing} />
-            <Member name = "John Olsen" rank = "Din mor" startEditing={StartEditing} />
-            <Member name = "John Olsen" rank = "Din mor" startEditing={StartEditing} />
-            <Member name = "John Olsen" rank = "Din mor" startEditing={StartEditing} />
-            <Member name = "John Olsen" rank = "Din mor" startEditing={StartEditing} />
-            <Member name = "John Olsen" rank = "Din mor" startEditing={StartEditing} />
-            <Member name = "John Olsen" rank = "Din mor" startEditing={StartEditing} />
-            <Member name = "John Olsen" rank = "Din mor" startEditing={StartEditing} />
-            <Member name = "John Olsen" rank = "Din mor" startEditing={StartEditing} />
-            <Member name = "John Olsen" rank = "Din mor" startEditing={StartEditing} />
+            {members.map((member, index) => {
+                return (
+                    <Member key={index} name={member.name} rank={member.rank} startEditing={startEditing} />
+                )
+            })}
         </div>
     )
     

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Role } from './role'
-import { RoleEditing, RoleEditingData } from './role-editing';
+import { RoleEditing } from './role-editing';
 import { fetchNui } from "../../../utils/fetchNui";
 import '../../../css/rolespage.css'
 
@@ -15,34 +15,41 @@ function LoadingRoles() {
 interface IRole {
     id: number;
     name: string;
+    playerAmount: number;
 }
 
 export function RolesPage() {
-    const [roles, setRoles] = useState<IRole[]>([{id: 1, name: 'Præsident'}, {id: 2, name: 'Vice-Præsident'}])
-    const [editing, setEditing] = useState(true);
+    const [roles, setRoles] = useState<IRole[]>([])
+    const [currentRoleId, setCurrentRoleId] = useState<number>(-1);
+    const [editing, setEditing] = useState(false);
 
-    async function FetchRoles() {
-        fetchNui<any>('fetchRoles', {}).then(
+    async function fetchRoles() {
+        fetchNui<any>('fetchRoles').then(
             (response) => {
+                //Sort by id descending
+                response.sort((a: IRole, b: IRole) => {
+                    return b.id - a.id;
+                })
                 setRoles(response);
             }
         );
     }
 
     useEffect(() => {
-        FetchRoles();
+        fetchRoles();
     }, [])
 
-    function StartEditing(role_id: number) {
-        
+    function startEditing(role_id: number) {
+        setCurrentRoleId(role_id);
         setEditing(true);
     }
 
-    function StopEditing() {
+    function stopEditing() {
+        setCurrentRoleId(-1);
         setEditing(false);
     }
 
-    function SaveRole() {
+    function saveRole() {
         setEditing(false);
     }
 
@@ -57,7 +64,7 @@ export function RolesPage() {
     if (editing) {
         return (
             <div className="role-editing">
-                <RoleEditing stopEditing = {StopEditing} saveRole = {SaveRole}/>
+                <RoleEditing stopEditing = {stopEditing} saveRole = {saveRole} role_id={currentRoleId}/>
             </div>
             
         )
@@ -67,7 +74,7 @@ export function RolesPage() {
         <div className="roles">
             {roles.map((role) => {
                 return (
-                    <Role id={role.id} name={role.name} startEditing={StartEditing} />
+                    <Role id={role.id} name={role.name} playerAmount = {role.playerAmount} startEditing={startEditing} />
                 )
             })}
         </div>

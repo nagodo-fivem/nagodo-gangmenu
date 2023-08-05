@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NameChanger } from './name-changer';
 import { PermissionChanger } from './permission-changer';
+import { fetchNui } from "../../../utils/fetchNui";
 
-export interface RoleEditingData {
+interface RoleData {
     id: number;
     name: string;
+    permissions: string[];
 }
 
 interface RoleEditingProps {
+    role_id: number;
     stopEditing: Function;
     saveRole: Function;
 }
 
 export function RoleEditing(props: RoleEditingProps) {
+    const [roleData, setRoleData] = useState<RoleData>();
+
+    async function fetchRole(role_id: number) {
+        fetchNui<any>('fetchRole', {role_id}).then(
+            (response) => {
+                
+            }
+        );
+    }
+
+    useEffect(() => {
+        fetchRole(props.role_id);
+    }, [])
+
     return (
         <div className='editor'>
             <div className="current-edit">

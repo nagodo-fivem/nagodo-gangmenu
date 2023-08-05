@@ -7,16 +7,16 @@ interface MemberProps {
 
 export function Member(props: MemberProps) {
 
-    function EditMember() {
+    function editMember() {
         props.startEditing();
     }
 
     return (
         <div className="member">
-            <p className='info name'>John Olsen</p>
-            <p className='info rank'>Præsident</p>
+            <p className='info name'>{props.name}</p>
+            <p className='info rank'>{props.rank}</p>
 
-            <div className='edit-btn' onClick={() => {EditMember()}}>
+            <div className='edit-btn' onClick={() => {editMember()}}>
                 <i className="fas fa-solid fa-edit"></i>
             </div>
         </div>
