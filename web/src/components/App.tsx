@@ -7,7 +7,7 @@ import { GangMenu } from './menu/gangmenu';
 
 
 const App: React.FC = () => {
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
     const [currentPage, setCurrentPage] = useState('members');
     
     //NUI Hooks

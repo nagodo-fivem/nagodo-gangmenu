@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Member } from './member'
-import { MemberEditing, MemberEditingData } from './member-editing';
+import { MemberEditing } from './member-editing';
+import { MemberData } from './member-editing';
 import { fetchNui } from "../../../utils/fetchNui";
 import '../../../css/memberspage.css'
 
@@ -13,6 +14,7 @@ function LoadingMembers() {
 }
 
 interface IMember {
+    member_id: string;
     name: string;
     rank: string;
 }
@@ -20,7 +22,7 @@ interface IMember {
 export function MembersPage() {
     const [members, setMembers] = useState<IMember[]>([])
     const [editing, setEditing] = useState(false);
-    const [editingData, setEditingData] = useState<MemberEditingData>();
+    const [currentMemberId, setCurrentMemberId] = useState<string>("");
 
     async function fetchMembers() {
         fetchNui<any>('fetchMembers').then(
@@ -34,8 +36,8 @@ export function MembersPage() {
         fetchMembers();
     }, [])
 
-    function startEditing(member_id: number) {
-        
+    function startEditing(member_id: string) {
+        setCurrentMemberId(member_id);
         setEditing(true);
     }
 
@@ -43,7 +45,12 @@ export function MembersPage() {
         setEditing(false);
     }
 
-    function saveMember() {
+    function saveMember(newData: MemberData) {
+        fetchNui<any>('saveMember', {newData}).then(
+            (response) => {
+                fetchMembers();
+            }
+        );
         setEditing(false);
     }
 
@@ -58,7 +65,7 @@ export function MembersPage() {
     if (editing) {
         return (
             <div className="member-editing">
-                <MemberEditing stopEditing = {stopEditing} saveMember = {saveMember}/>
+                <MemberEditing stopEditing = {stopEditing} saveMember = {saveMember} member_id = {currentMemberId}  />
             </div>
             
         )
@@ -68,7 +75,7 @@ export function MembersPage() {
         <div className="members">
             {members.map((member, index) => {
                 return (
-                    <Member key={index} name={member.name} rank={member.rank} startEditing={startEditing} />
+                    <Member key={index} name={member.name} rank={member.rank} member_id = {member.member_id} startEditing={startEditing} />
                 )
             })}
         </div>

@@ -1,4 +1,5 @@
 interface MemberProps {
+    member_id: string;
     name: string;
     rank: string;
 
@@ -8,7 +9,7 @@ interface MemberProps {
 export function Member(props: MemberProps) {
 
     function editMember() {
-        props.startEditing();
+        props.startEditing(props.member_id);
     }
 
     return (

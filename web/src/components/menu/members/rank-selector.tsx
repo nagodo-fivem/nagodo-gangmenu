@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { fetchNui } from "../../../utils/fetchNui";
 
 interface OptionProps {
     id: number;
@@ -19,9 +20,14 @@ interface IOption {
     name: string;
 }
 
-export function RankSelector() {
-    const [selectedRank, setSelectedRank] = useState('Præsident');
-    const [options, setOptions] = useState<IOption[]>([{id: 1, name: 'Præsident'}, {id: 2, name: 'Vicepræsident'}, {id: 3, name: 'Sekretær'}, {id: 4, name: 'Kasserer'}, {id: 5, name: 'Medlem'}, {id: 6, name: 'Prospect'}, {id: 7, name: 'Supporter'}]);
+interface RankSelectorProps {
+    updateMemberRank: Function;
+    selectedRankId: number;
+}
+
+export function RankSelector(props: RankSelectorProps) {
+    const [selectedRankId, setSelectedRankId] = useState<number>(props.selectedRankId);
+    const [options, setOptions] = useState<IOption[]>([]);
     const [open, setOpen] = useState(false);
 
     function handleSelectorClick() {
@@ -29,30 +35,53 @@ export function RankSelector() {
     }
 
     function handleOptionClick(id: number) {
+        props.updateMemberRank(id);
+        setOpen(false);
+        setSelectedRankId(id);
+    }
+
+    function getSelectedRankName(id: number) {
+
+        if (options === undefined || options === null) {
+            return 'error';
+        }
+
         let option = options.find((option) => {
-            return option.id === id;
+            return option.id == id;
         })
 
-        if (option !== undefined) {
-            setOpen(false);
-            setSelectedRank(option.name);
+        if (option === undefined) {
+            return 'error';
         }
+
+        return option.name;
     }
 
-    async function fetchOptions() {
-
-    }
 
     function Header(props: {open: boolean}) {
         let arrow = props.open ? "fa-solid fa-chevron-up": "fa-solid fa-chevron-down";
         return (
             <div className='header' onClick={() => {handleSelectorClick()}}>
-                <p className='selected-rank'>{selectedRank}</p>
+                <p className='selected-rank'>{getSelectedRankName(selectedRankId)}</p>
                 <div className='arrow'>
                    <i className = {arrow}></i>
                 </div>
             </div>
         )
+    }
+
+    async function fetchOptions() {
+        fetchNui<any>('fetchRankSeletorOptions').then(
+            (response) => {
+                let options = response;
+    
+                options.sort((a: IOption, b: IOption) => {
+                    return b.id- a.id;
+                })
+
+                setOptions(options);
+            }
+        );
     }
 
     useEffect(() => {
