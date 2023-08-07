@@ -48,8 +48,15 @@ end)
 RegisterNUICallback('saveMember', function(data, cb)
     local memberData = data.newData.current
 
-    local succes = exports['nagodo-gangs']:UpdateMemberRank(memberData)
-    cb(succes)
+    local success = exports['nagodo-gangs']:UpdateMemberRank(memberData)
+    cb(success)
+end)
+
+RegisterNUICallback('saveRole', function(data, cb)
+    local roleData = data.newData.current
+
+    local success = exports['nagodo-gangs']:UpdateRoleData(roleData)
+    cb(success)
 end)
 
 RegisterNUICallback('close', function(data, cb)

@@ -3,12 +3,14 @@ import '../../../css/checkmark.css'
 
 interface PermissionCheckmarkProps {
     checked: boolean;
+    checkMarkToggled: Function;
 }
 
 export function PermissionCheckmark(props: PermissionCheckmarkProps) {
     const [checked, setChecked] = useState(props.checked);
 
     function toggleCheckmark() {
+        props.checkMarkToggled(!checked);
         setChecked(!checked);
     }
 

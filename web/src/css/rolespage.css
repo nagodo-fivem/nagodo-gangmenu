@@ -91,14 +91,14 @@
   position: relative;
   margin-top: 1vh;
   width: 100%;
-  height: 7vh;
+  height: 8vh;
 }
 .role-editing .editor .name-changer .changer {
   width: 100%;
   height: 100%;
   background-color: var(--dark2);
 }
-.role-editing .editor .name-changer .changer .name {
+.role-editing .editor .name-changer .changer .title {
   position: absolute;
   font-size: 1.8vh;
   color: var(--white);
@@ -107,16 +107,17 @@
 }
 .role-editing .editor .name-changer .changer input {
   position: absolute;
-  width: 30vh;
+  width: 39vh;
   height: 3vh;
   left: 1vh;
-  bottom: 0.5vh;
+  bottom: 1vh;
   background-color: var(--dark3);
   border: none;
   outline: none;
   color: var(--white);
   font-size: 1.7vh;
-  padding: 0;
+  padding-left: 1vh;
+  padding-right: 1vh;
 }
 .role-editing .editor .permission-changer {
   position: relative;

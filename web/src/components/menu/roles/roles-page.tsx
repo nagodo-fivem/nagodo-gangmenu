@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Role } from './role'
 import { RoleEditing } from './role-editing';
+import { RoleData } from './role-editing';
 import { fetchNui } from "../../../utils/fetchNui";
 import '../../../css/rolespage.css'
+import { MemberData } from '../members/member-editing';
 
 function LoadingRoles() {
     return (
@@ -49,7 +51,12 @@ export function RolesPage() {
         setEditing(false);
     }
 
-    function saveRole() {
+    function saveRole(newData: RoleData) {
+        fetchNui<any>('saveRole', {newData}).then(
+            (response) => {
+                fetchRoles();
+            }
+        );
         setEditing(false);
     }
 

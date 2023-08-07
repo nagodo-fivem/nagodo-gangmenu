@@ -17,14 +17,21 @@ export interface Permission {
 }
 
 interface PermissionProps {
+    identifier: string;
     name: string;
     checked: boolean;
+    checkMarkToggled: Function;
 }
 
 function Permission(props: PermissionProps) {
+
+    function handleToggle(checked: boolean) {
+        props.checkMarkToggled(props.identifier, checked);
+    }
+
     return (
         <div className="permission">
-            <PermissionCheckmark checked = {props.checked}/>
+            <PermissionCheckmark checked = {props.checked} checkMarkToggled = {handleToggle}/>
             <p className='text'>{props.name}</p>
         </div>
     )
@@ -32,6 +39,7 @@ function Permission(props: PermissionProps) {
 
 interface PermissionChangerProps {
     permissions: Permission[];
+    checkMarkToggled: Function;
 }
 
 export function PermissionChanger(props: PermissionChangerProps) {
@@ -47,7 +55,7 @@ export function PermissionChanger(props: PermissionChangerProps) {
     return (
         <div className="changer">
             {props.permissions.map((permission) => (
-                <Permission name = {permission.label} checked = {permission.enabled} />
+                <Permission identifier = {permission.identifier} name = {permission.label} checked = {permission.enabled} checkMarkToggled = {props.checkMarkToggled} />
             ))}
         </div>
     )
