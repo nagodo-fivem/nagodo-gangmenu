@@ -17,12 +17,12 @@ interface RoleEditingProps {
 }
 
 export function RoleEditing(props: RoleEditingProps) {
-    const [roleData, setRoleData] = useState<RoleData>({id: 1, name: "Præsident", permissions: []});
+    const [roleData, setRoleData] = useState<RoleData>();
 
     async function fetchRole(role_id: number) {
         fetchNui<any>('fetchRoleData', {role_id}).then(
             (response) => {
-                
+                setRoleData(response);
             }
         );
     }
@@ -30,6 +30,16 @@ export function RoleEditing(props: RoleEditingProps) {
     useEffect(() => {
         fetchRole(props.role_id);
     }, [])
+
+    if (roleData === undefined || roleData === null) {
+        return (
+            <div className='editor'>
+                <div className="current-edit">
+                    <p className="info name">Loading...</p>
+                </div> 
+            </div>
+        );
+    }
 
     return (
         <div className='editor'>

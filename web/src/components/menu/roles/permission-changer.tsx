@@ -35,10 +35,8 @@ interface PermissionChangerProps {
 }
 
 export function PermissionChanger(props: PermissionChangerProps) {
-    const [permissions, setPermissions] = useState<Permission[]>([{identifier: "accessvault", label: 'Tilgå lager', enabled: false}]);
-
-
-    if (permissions === undefined || permissions === null || permissions.length === 0) {
+   
+    if (props.permissions === undefined || props.permissions === null || props.permissions.length === 0) {
         return (
             <div className="changer">
                 <LoadingPermissions />
@@ -48,7 +46,7 @@ export function PermissionChanger(props: PermissionChangerProps) {
 
     return (
         <div className="changer">
-            {permissions.map((permission) => (
+            {props.permissions.map((permission) => (
                 <Permission name = {permission.label} checked = {permission.enabled} />
             ))}
         </div>
