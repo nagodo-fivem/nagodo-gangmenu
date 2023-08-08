@@ -1,75 +1,120 @@
 .allies {
     border-top: solid 0.4vh var(--dark2);
-
+    position: absolute;
     width: 100%;
-    height: 100%;
+    height: 61vh;
+
+    top: 0vh;
 
     overflow: auto;
 
-    .section {
-       
+    .newally {
         position: relative;
+
         width: 100%;
-       
-        margin-bottom: 1vh;
+        height: 4vh;
 
-        &.list {
-            height: 30vh;
-        }
+        background-color: var(--dark2);
 
-        &.pending {
-            height: 20vh;
-        }
+        margin-top: 0.5vh;
+        margin-bottom: 0.5vh;
 
-        .title {
-            position: absolute;
+        .info {
+            position: absolute;            
+            left: 1vh;
 
-            width: 100%;
-            height: 4vh;
-            border-bottom: solid 0.4vh var(--dark2);
-
-            p {
-                position: absolute;
-                top: -0.8vh;
-                font-size: 1.8vh;
+            &.name {
                 color: var(--white);
+                font-size: 1.8vh;
+                top: -0.8vh;
             }
+
         }
 
-        .wrapper {
-            position: absolute;
-            width: 100%;
-            height: calc(100% - 5vh);
-            overflow: auto;
+        &:hover {
+            cursor: pointer;
+            background-color: var(--dark3);
+        }
+    }
 
-            bottom: 0vh;
+    .ally {
+        position: relative;
 
-            .ally {
-                position: relative;
-        
-                width: 100%;
-                height: 7vh;
-        
-                background-color: var(--dark2);
+        width: 100%;
+        height: 7vh;
+
+        background-color: var(--dark2);
+
+        margin-top: 0.5vh;
+        margin-bottom: 0.5vh;
+
+        .info {
+            position: absolute;            
+            left: 1vh;
+
+            &.name {
+                color: var(--white);
+                font-size: 1.8vh;
+                top: -1vh;
+            }
+
+            &.extra {
+                color: var(--gray);
+                font-size: 1.5vh;
+                top: 1.5vh;
+            }
     
-                margin-bottom: 0.5vh;
-        
-                .info {
-                    position: absolute;            
-                    left: 1vh;
-        
-                    &.name {
-                        color: var(--white);
-                        font-size: 1.8vh;
-                        top: -1vh;
-                    }
-        
+        }
+
+        .buttons {
+            position: absolute;
             
+            width: fit-content;
+            height: fit-content;
+
+            right: 1vh;
+            top: 50%;
+            transform: translateY(-50%);
+            
+
+            .button {
+                position: relative;
+                height: 4vh;
+                width: 10vh;
+                float: right;
+                
+
+                margin-left: 0.5vh;
+                margin-right: 0.5vh;
+
+                border-radius: 0.5vh;
+
+                p {
+                    color: var(--white);
+                    font-size: 1.7vh;
+                    position: absolute;
+    
+                    top: -0.7vh;
+                    text-align: center;
+                    left: 50%;
+                    transform: translateX(-50%);
+
                 }
-        
+
+                &.red {
+                    background-color: var(--red);
+                }
+
+                &.green {
+                    background-color: var(--green);
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
-        
+
     }
 
     

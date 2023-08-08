@@ -1,54 +1,90 @@
 .allies {
   border-top: solid 0.4vh var(--dark2);
+  position: absolute;
   width: 100%;
-  height: 100%;
+  height: 61vh;
+  top: 0vh;
   overflow: auto;
 }
-.allies .section {
+.allies .newally {
   position: relative;
   width: 100%;
-  margin-bottom: 1vh;
-}
-.allies .section.list {
-  height: 30vh;
-}
-.allies .section.pending {
-  height: 20vh;
-}
-.allies .section .title {
-  position: absolute;
-  width: 100%;
   height: 4vh;
-  border-bottom: solid 0.4vh var(--dark2);
+  background-color: var(--dark2);
+  margin-top: 0.5vh;
+  margin-bottom: 0.5vh;
 }
-.allies .section .title p {
+.allies .newally .info {
   position: absolute;
-  top: -0.8vh;
-  font-size: 1.8vh;
+  left: 1vh;
+}
+.allies .newally .info.name {
   color: var(--white);
+  font-size: 1.8vh;
+  top: -0.8vh;
 }
-.allies .section .wrapper {
-  position: absolute;
-  width: 100%;
-  height: calc(100% - 5vh);
-  overflow: auto;
-  bottom: 0vh;
+.allies .newally:hover {
+  cursor: pointer;
+  background-color: var(--dark3);
 }
-.allies .section .wrapper .ally {
+.allies .ally {
   position: relative;
   width: 100%;
   height: 7vh;
   background-color: var(--dark2);
+  margin-top: 0.5vh;
   margin-bottom: 0.5vh;
 }
-.allies .section .wrapper .ally .info {
+.allies .ally .info {
   position: absolute;
   left: 1vh;
 }
-.allies .section .wrapper .ally .info.name {
+.allies .ally .info.name {
   color: var(--white);
   font-size: 1.8vh;
   top: -1vh;
+}
+.allies .ally .info.extra {
+  color: var(--gray);
+  font-size: 1.5vh;
+  top: 1.5vh;
+}
+.allies .ally .buttons {
+  position: absolute;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  right: 1vh;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.allies .ally .buttons .button {
+  position: relative;
+  height: 4vh;
+  width: 10vh;
+  float: right;
+  margin-left: 0.5vh;
+  margin-right: 0.5vh;
+  border-radius: 0.5vh;
+}
+.allies .ally .buttons .button p {
+  color: var(--white);
+  font-size: 1.7vh;
+  position: absolute;
+  top: -0.7vh;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.allies .ally .buttons .button.red {
+  background-color: var(--red);
+}
+.allies .ally .buttons .button.green {
+  background-color: var(--green);
+}
+.allies .ally .buttons .button:hover {
+  cursor: pointer;
 }
 .allies .loading {
   position: relative;
@@ -65,4 +101,4 @@
   top: 0.3vh;
   left: 50%;
   transform: translateX(-50%);
-}
+}/*# sourceMappingURL=alliespage.css.map */
