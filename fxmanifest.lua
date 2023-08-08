@@ -4,6 +4,7 @@ game  'gta5'
 author 'Nagodo'
 
 shared_scripts {
+    'shared/exports.lua',
     'shared/config.lua'
 }
 

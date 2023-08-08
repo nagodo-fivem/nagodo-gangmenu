@@ -1,8 +1,3 @@
---CLIENT SIDE
-exports('OpenGangMenu', function()
-    OpenMenu()
-end)
-
 function OpenMenu()
     SetNuiFocus(true, true)
     SendNUIMessage({
@@ -12,13 +7,13 @@ function OpenMenu()
 end
 
 RegisterNUICallback('fetchMembers', function(data, cb)
-    local members = exports['nagodo-gangs']:GetAllMembers()
+    local members = exports['nagodo-gangs']:GetAllMembers("oki")
 
     cb(members)
 end)
 
 RegisterNUICallback('fetchRoles', function(data, cb)
-    local roles = exports['nagodo-gangs']:GetAllRoles()
+    local roles = exports['nagodo-gangs']:GetAllRoles("oki")
    
     cb(roles)
 end)

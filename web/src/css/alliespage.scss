@@ -1,0 +1,99 @@
+.allies {
+    border-top: solid 0.4vh var(--dark2);
+
+    width: 100%;
+    height: 100%;
+
+    overflow: auto;
+
+    .section {
+       
+        position: relative;
+        width: 100%;
+       
+        margin-bottom: 1vh;
+
+        &.list {
+            height: 30vh;
+        }
+
+        &.pending {
+            height: 20vh;
+        }
+
+        .title {
+            position: absolute;
+
+            width: 100%;
+            height: 4vh;
+            border-bottom: solid 0.4vh var(--dark2);
+
+            p {
+                position: absolute;
+                top: -0.8vh;
+                font-size: 1.8vh;
+                color: var(--white);
+            }
+        }
+
+        .wrapper {
+            position: absolute;
+            width: 100%;
+            height: calc(100% - 5vh);
+            overflow: auto;
+
+            bottom: 0vh;
+
+            .ally {
+                position: relative;
+        
+                width: 100%;
+                height: 7vh;
+        
+                background-color: var(--dark2);
+    
+                margin-bottom: 0.5vh;
+        
+                .info {
+                    position: absolute;            
+                    left: 1vh;
+        
+                    &.name {
+                        color: var(--white);
+                        font-size: 1.8vh;
+                        top: -1vh;
+                    }
+        
+            
+                }
+        
+            }
+        }
+        
+    }
+
+    
+
+    .loading {
+        position: relative;
+
+        width: 100%;
+        height: 7vh;
+
+        background-color: var(--dark2);
+
+        margin-top: 0.5vh;
+        margin-bottom: 0.5vh;
+
+        p {
+            position: absolute;
+
+            color: var(--white);
+
+            font-size: 2vh;
+            top: 0.3vh;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+}
