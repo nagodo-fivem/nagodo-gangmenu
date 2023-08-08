@@ -1,4 +1,15 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+
 function OpenMenu()
+    local Player = QBCore.Functions.GetPlayerData()
+    local gang = Player.gang.name
+    print(gang)
+    local gradeLevel = Player.gang.grade.level
+    print(gradeLevel)
+    local hasPermission = exports['nagodo-gangs']:DoesGradeHavePermission(gang, gradeLevel, "open_menu")
+
+    if not hasPermission then return end
+
     SetNuiFocus(true, true)
     SendNUIMessage({
         action = "open",

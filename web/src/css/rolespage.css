@@ -123,13 +123,13 @@
   position: relative;
   margin-top: 0.5vh;
   width: 100%;
-  height: 39.5vh;
+  height: 39vh;
 }
 .role-editing .editor .permission-changer .changer {
   position: absolute;
-  bottom: 0vh;
+  bottom: 1vh;
   width: 100%;
-  height: 38vh;
+  height: 37.5vh;
   overflow: auto;
 }
 .role-editing .editor .permission-changer .changer .permission {
@@ -196,4 +196,4 @@
   text-align: center;
   left: 50%;
   transform: translateX(-50%);
-}/*# sourceMappingURL=rolespage.css.map */
+}
