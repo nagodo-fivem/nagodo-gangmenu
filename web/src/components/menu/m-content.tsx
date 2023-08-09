@@ -1,6 +1,7 @@
 import { MembersPage } from "./members/member-page";
 import { RolesPage } from "./roles/roles-page";
 import { AlliesPage } from "./allies/allies-page";
+import { BankingPage } from "./banking/banking-page";
 
 interface MenuContentProps {
     currentPage: string;
@@ -15,6 +16,8 @@ export function MenuContent(props: MenuContentProps) {
         content = <RolesPage />
     } else if (props.currentPage === 'allies') {
         content = <AlliesPage />
+    } else if (props.currentPage === 'banking') {
+        content = <BankingPage />
     }
         
     return (

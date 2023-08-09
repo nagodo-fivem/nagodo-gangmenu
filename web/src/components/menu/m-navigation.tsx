@@ -31,6 +31,7 @@ export function Navigation(props: NavigationProps) {
             <NavigationItem name = "members" icon = "fa-solid fa-people-group" setCurrentPage={props.setCurrentPage} />
             <NavigationItem name = "roles" icon = "fa-brands fa-windows" setCurrentPage={props.setCurrentPage}/>
             <NavigationItem name = "allies" icon = "fa-brands fa-windows" setCurrentPage={props.setCurrentPage}/>
+            <NavigationItem name = "banking" icon = "fa-solid fa-coins" setCurrentPage={props.setCurrentPage}/>
         </div>
     );
 }
