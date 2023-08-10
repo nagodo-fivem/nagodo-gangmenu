@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Account } from './account'
 
 import '../../../css/bankingpage.css'
+import { _T } from '../../../utils/translation';
 
 
 function LoadingAccounts() {
     return (
         <div className="loading">
-            <p>Loading...</p>
+            <p>{_T('loading')}</p>
         </div>
     )
 }

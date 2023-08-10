@@ -3,6 +3,7 @@ import { NameChanger } from './name-changer';
 import { PermissionChanger } from './permission-changer';
 import { Permission }  from './permission-changer';
 import { fetchNui } from "../../../utils/fetchNui";
+import { _T } from '../../../utils/translation';
 
 export interface RoleData {
     id: number;
@@ -54,7 +55,7 @@ export function RoleEditing(props: RoleEditingProps) {
         return (
             <div className='editor'>
                 <div className="current-edit">
-                    <p className="info name">Loading...</p>
+                    <p className="info name">{_T('loading')}.</p>
                 </div> 
             </div>
         );

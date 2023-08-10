@@ -4,11 +4,12 @@ import { MemberEditing } from './member-editing';
 import { MemberData } from './member-editing';
 import { fetchNui } from "../../../utils/fetchNui";
 import '../../../css/memberspage.css'
+import { _T } from '../../../utils/translation';
 
 function LoadingMembers() {
     return (
         <div className="loading">
-            <p>Loading...</p>
+            <p>{_T("loading")}</p>
         </div>
     )
 }

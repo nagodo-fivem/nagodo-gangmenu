@@ -5,11 +5,12 @@ import { RoleData } from './role-editing';
 import { fetchNui } from "../../../utils/fetchNui";
 import '../../../css/rolespage.css'
 import { MemberData } from '../members/member-editing';
+import { _T } from '../../../utils/translation';
 
 function LoadingRoles() {
     return (
         <div className="loading">
-            <p>Loading...</p>
+            <p>{_T('loading')}</p>
         </div>
     )
 }

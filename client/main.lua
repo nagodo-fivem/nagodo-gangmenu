@@ -1,4 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
+local translationsSet = false
 
 function OpenMenu()
     local Player = QBCore.Functions.GetPlayerData()
@@ -7,6 +8,15 @@ function OpenMenu()
     local hasPermission = exports['nagodo-gangs']:DoesLocalPlayerHavePermission("open_menu", gang)
 
     if not hasPermission then return end
+
+    if not translationsSet then
+        local translations = exports['nagodo-gangs']:GetTranslations()
+        SendNUIMessage({
+            action = "setTranslations",
+            data = translations
+        })
+        translationsSet = true
+    end
 
     SetNuiFocus(true, true)
     SendNUIMessage({

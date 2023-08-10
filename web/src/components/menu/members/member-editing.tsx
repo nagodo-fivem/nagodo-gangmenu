@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { RankSelector } from './rank-selector';
 import { fetchNui } from "../../../utils/fetchNui";
+import { _T } from '../../../utils/translation';
 
 export interface MemberData {
     id: string;
@@ -44,7 +45,7 @@ export function MemberEditing(props: MemberEditingProps) {
             <div className="editor">
 
                 <div className="current-edit">
-                    <p className="info name">Loading...</p>
+                    <p className="info name">{_T('loading')}</p>
                     <p className="info rank"></p>
                 </div>
             </div>
@@ -55,8 +56,8 @@ export function MemberEditing(props: MemberEditingProps) {
         <div className="editor">
 
             <div className="current-edit">
-                <p className="info name">Editing: {memberData.name}</p>
-                <p className="info rank">Rank: {memberData.rankName}</p>
+                <p className="info name">{_T('editing') + memberData.name}</p>
+                <p className="info rank">{_T('current_role') + memberData.rankName}</p>
             </div>
 
             <div className="rank-selector">
@@ -66,11 +67,11 @@ export function MemberEditing(props: MemberEditingProps) {
             <div className = "main-btns">
 
                 <div className="cancel btn" onClick={() => {props.stopEditing()}}>
-                    <p className="text">Cancel</p>
+                    <p className="text">{_T('cancel')}</p>
                 </div>
 
                 <div className="save btn" onClick={() => {props.saveMember(_memberData)}}>
-                    <p className="text">Save</p>
+                    <p className="text">{_T('save')}</p>
                 </div>
                 
             </div>
