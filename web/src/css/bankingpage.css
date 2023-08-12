@@ -20,6 +20,20 @@
   margin-top: 0.5vh;
   margin-bottom: 0.5vh;
 }
+.banking .accounts .account .info {
+  position: absolute;
+  left: 1vh;
+}
+.banking .accounts .account .info.name {
+  color: var(--white);
+  font-size: 1.8vh;
+  top: -0.8vh;
+}
+.banking .accounts .account .info.money {
+  color: var(--gray);
+  font-size: 1.5vh;
+  top: 1.5vh;
+}
 .banking .actions {
   position: absolute;
   width: 100%;
@@ -63,4 +77,4 @@
   top: 0.3vh;
   left: 50%;
   transform: translateX(-50%);
-}
+}/*# sourceMappingURL=bankingpage.css.map */

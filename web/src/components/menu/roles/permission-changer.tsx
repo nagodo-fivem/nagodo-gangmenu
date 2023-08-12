@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PermissionCheckmark } from './permission-checkmark';
 import { fetchNui } from "../../../utils/fetchNui";
+import { _T } from '../../../utils/translation';
 
 function LoadingPermissions() {
     return (
@@ -32,7 +33,7 @@ function Permission(props: PermissionProps) {
     return (
         <div className="permission">
             <PermissionCheckmark checked = {props.checked} checkMarkToggled = {handleToggle}/>
-            <p className='text'>{props.name}</p>
+            <p className='text'>{_T(props.name)}</p>
         </div>
     )
 }
@@ -44,6 +45,19 @@ interface PermissionChangerProps {
 
 export function PermissionChanger(props: PermissionChangerProps) {
    
+    function sortedPermissions(permissions: Permission[]) {
+        return permissions.sort((a, b) => {
+            if (a.label < b.label) {
+                return -1;
+            } else if (a.label > b.label) {
+                return 1;
+            } else {
+                return 0;
+            }
+        })
+    }
+
+    
     if (props.permissions === undefined || props.permissions === null || props.permissions.length === 0) {
         return (
             <div className="changer">
@@ -54,7 +68,7 @@ export function PermissionChanger(props: PermissionChangerProps) {
 
     return (
         <div className="changer">
-            {props.permissions.map((permission) => (
+            {sortedPermissions(props.permissions).map((permission) => (
                 <Permission identifier = {permission.identifier} name = {permission.label} checked = {permission.enabled} checkMarkToggled = {props.checkMarkToggled} />
             ))}
         </div>

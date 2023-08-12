@@ -34,7 +34,7 @@ function Action(props: ActionProps) {
 }
 
 export function BankingPage() {
-    const [accounts, setAccounts] = useState<any[]>(["", "", "", "", "", "", ""])
+    const [accounts, setAccounts] = useState<any[]>([{name: "Din mor", money: 10000},{name: "Din mor", money: 250000},{name: "Din mor", money: 10000},{name: "Din mor", money: 99999999999}])
     
     if (accounts === undefined || accounts === null || accounts.length === 0) {
         return (
@@ -48,7 +48,7 @@ export function BankingPage() {
         <div className="banking">
             <div className="accounts">
                 {accounts.map((account) => {
-                    return <Account key={account.id} />
+                    return <Account key={account.id} name = {account.name} money={account.money} />
                 })}
             </div>
             <div className='actions'>

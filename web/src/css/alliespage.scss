@@ -117,7 +117,17 @@
 
     }
 
-    
+    .addallymenu {
+        position: relative;
+
+        width: 100%;
+        height: 10vh;
+
+        background-color: var(--dark2);
+
+        margin-top: 0.5vh;
+        margin-bottom: 0.5vh;
+    }
 
     .loading {
         position: relative;

@@ -26,6 +26,23 @@
 
             margin-top: 0.5vh;
             margin-bottom: 0.5vh;
+
+            .info {
+                position: absolute;            
+                left: 1vh;
+
+                &.name {
+                    color: var(--white);
+                    font-size: 1.8vh;
+                    top: -0.8vh;
+                }
+
+                &.money {
+                    color: var(--gray);
+                    font-size: 1.5vh;
+                    top: 1.5vh;
+                }
+            }
         }
 
     }

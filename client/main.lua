@@ -73,6 +73,12 @@ RegisterNUICallback('saveRole', function(data, cb)
     cb(success)
 end)
 
+RegisterNUICallback('fetchAllies', function(data, cb)
+    local allies = exports['nagodo-gangs']:GetAllAllies("oki")
+
+    cb(allies)
+end)
+
 RegisterNUICallback('close', function(data, cb)
     SetNuiFocus(false, false)
     cb('ok')

@@ -8,8 +8,8 @@ import { setTranslations } from '../utils/translation';
 
 
 const App: React.FC = () => {
-    const [show, setShow] = useState(false);
-    const [currentPage, setCurrentPage] = useState('members');
+    const [show, setShow] = useState(true);
+    const [currentPage, setCurrentPage] = useState('allies');
     
     //NUI Hooks
     useNuiEvent<boolean>('open', (data) => {
