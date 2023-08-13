@@ -90,9 +90,72 @@
   position: relative;
   width: 100%;
   height: 10vh;
-  background-color: var(--dark2);
   margin-top: 0.5vh;
   margin-bottom: 0.5vh;
+}
+.allies .addallymenu .ally-selector {
+  position: relative;
+  margin-top: 0.5vh;
+  width: 100%;
+  height: auto;
+  display: inline-block;
+}
+.allies .addallymenu .ally-selector .header {
+  position: relative;
+  height: 5vh;
+  width: 100%;
+  background-color: var(--dark2);
+}
+.allies .addallymenu .ally-selector .header:hover {
+  cursor: pointer;
+}
+.allies .addallymenu .ally-selector .header .selected-rank {
+  position: absolute;
+  top: 0vh;
+  color: var(--white);
+  font-size: 1.6vh;
+  left: 1vh;
+}
+.allies .addallymenu .ally-selector .header .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 2vh;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.allies .addallymenu .ally-selector .header .arrow i {
+  color: var(--gray);
+  font-size: 2vh;
+}
+.allies .addallymenu .ally-selector .options {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-height: 30vh;
+  margin-top: 1vh;
+  overflow: auto;
+}
+.allies .addallymenu .ally-selector .options .option {
+  position: relative;
+  height: 5vh;
+  width: 100%;
+  display: inline-block;
+  background-color: var(--dark2);
+  margin-bottom: 0.5vh;
+}
+.allies .addallymenu .ally-selector .options .option .name {
+  position: absolute;
+  top: 0vh;
+  color: var(--white);
+  font-size: 1.6vh;
+  left: 1vh;
+}
+.allies .addallymenu .ally-selector .options .option:hover {
+  background-color: var(--dark3);
+  cursor: pointer;
 }
 .allies .loading {
   position: relative;
