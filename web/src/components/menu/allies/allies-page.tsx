@@ -34,12 +34,37 @@ function AddNewAlly(props: AddAllyProps) {
 
 export function AlliesPage() {
     const [allies, setAllies] = useState<IAlly[]>([])
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [addingAlly, setAddingAlly] = useState<boolean>(false);
 
     async function fetchAllies() {
         fetchNui<any>('fetchAllies').then(
             (response) => {
-                setAllies(response);
+                let allies: IAlly[] = [];
+
+                for (let i = 0; i < response.length; i++) {
+                    let ally = response[i];
+                    let _ally = {
+                        gangIdentifier: ally.identifier,
+                        name: ally.name,
+                        type: 0
+                    }
+
+                    if (ally.accepted) {
+                        _ally.type = 3;
+                    } 
+                    else if (!ally.sender && !ally.accepted) {
+                        _ally.type = 1;
+                    }
+                    else if (ally.sender && !ally.accepted) {
+                        _ally.type = 2;
+                    } 
+
+                    allies.push(_ally);
+                }
+
+                setAllies(allies);
+                setIsLoaded(true);
             }
         );
     }
@@ -48,36 +73,67 @@ export function AlliesPage() {
         fetchAllies();
     }, [])
 
+    function sendAllyRequest(gangIdentifier: string) {
+
+        fetchNui<any>('sendAllyRequest', {gangIdentifier}).then(
+            (response) => {
+                fetchAllies();
+            }
+        );
+
+        setAddingAlly(false);
+    }
+
     function handleAddAlly() {
         setAddingAlly(true);
     }
 
-    function acceptAlly(gangIdentifier: string) {
+    function cancelAddAlly() {
+        setAddingAlly(false);
+    }
 
+    function acceptAlly(gangIdentifier: string) {
+        fetchNui<any>('acceptAllyRequest', {gangIdentifier}).then(
+            (response) => {
+                fetchAllies();
+            }
+        );
     }
 
     function denyAlly(gangIdentifier: string) {
-
+        fetchNui<any>('denyAllyRequest', {gangIdentifier}).then(
+            (response) => {
+                fetchAllies();
+            }
+        );
     }
 
     function cancelRequest(gangIdentifier: string) {
-
+        fetchNui<any>('cancelAllyRequest', {gangIdentifier}).then(
+            (response) => {
+                fetchAllies();
+            }
+        );
     }
 
     function removeAlly(gangIdentifier: string) {
-
+        fetchNui<any>('removeAlly', {gangIdentifier}).then(
+            (response) => {
+                fetchAllies();
+            }
+        );
     }
 
     if (addingAlly) {
         return (
             <div className="allies">
-                <AddAllyMenu />
+                <AddAllyMenu stopAddingAlly={cancelAddAlly} addAlly={sendAllyRequest} />
             </div>
         )
     }
 
 
-    if (allies === undefined || allies === null || allies.length === 0) {
+    if (allies === undefined || allies === null || allies.length === 0 && !isLoaded) {
         return (
             <div className="allies">
                 <AddNewAlly callback={handleAddAlly} />

@@ -74,10 +74,59 @@ RegisterNUICallback('saveRole', function(data, cb)
 end)
 
 RegisterNUICallback('fetchAllies', function(data, cb)
-    local allies = exports['nagodo-gangs']:GetAllAllies("oki")
+    local allies = exports['nagodo-gangs']:GetAllAllies()
 
     cb(allies)
 end)
+
+RegisterNUICallback('sendAllyRequest', function(data, cb)
+    local identifier = data.gangIdentifier
+
+    local done = exports['nagodo-gangs']:SendAllyRequest(identifier)
+
+    cb(done)
+end)
+
+RegisterNUICallback('fetchAllySelectorOptions', function(data, cb)
+    local ally_selector_options = exports['nagodo-gangs']:GetAllySelectorOptions()
+
+    cb(ally_selector_options)
+
+end)
+
+RegisterNUICallback('cancelAllyRequest', function(data, cb)
+    local identifier = data.gangIdentifier
+
+    local done = exports['nagodo-gangs']:CancelAllyRequest(identifier)
+
+    cb(done)
+end)
+
+RegisterNUICallback('acceptAllyRequest', function(data, cb)
+    local identifier = data.gangIdentifier
+
+    local done = exports['nagodo-gangs']:AcceptAllyRequest(identifier)
+
+    cb(done)
+end)
+
+RegisterNUICallback('denyAllyRequest', function(data, cb)
+    local identifier = data.gangIdentifier
+
+    local done = exports['nagodo-gangs']:DenyAllyRequest(identifier)
+
+    cb(done)
+end)
+
+RegisterNUICallback('removeAlly', function(data, cb)
+    local identifier = data.gangIdentifier
+
+    local done = exports['nagodo-gangs']:RemoveAlly(identifier)
+
+    cb(done)
+end)
+
+
 
 RegisterNUICallback('close', function(data, cb)
     SetNuiFocus(false, false)
