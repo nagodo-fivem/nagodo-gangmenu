@@ -1,6 +1,8 @@
 fx_version 'cerulean'
 game  'gta5' 
 
+version '1.0.0'
+
 author 'Nagodo'
 
 shared_scripts {
@@ -13,6 +15,7 @@ client_scripts {
 }
 
 server_scripts {
+    'versioncheck.lua',
     'server/main.lua',
 }
 

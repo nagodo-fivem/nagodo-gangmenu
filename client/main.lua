@@ -5,7 +5,7 @@ function OpenMenu()
     local Player = QBCore.Functions.GetPlayerData()
     local gang = Player.gang.name
 
-    local hasPermission = exports['nagodo-gangs']:DoesLocalPlayerHavePermission("open_menu", gang)
+    local hasPermission = exports['nagodo-gangs']:DoesLocalPlayerHavePermissionInGang("open_menu")
 
     if not hasPermission then return end
 
@@ -126,7 +126,13 @@ RegisterNUICallback('removeAlly', function(data, cb)
     cb(done)
 end)
 
+RegisterNUICallback('fetchPermission', function(data, cb)
+    local permission_name = data.permission_name
 
+    local hasPermission = exports['nagodo-gangs']:DoesLocalPlayerHavePermissionInGang(permission_name)
+
+    cb(hasPermission)
+end)
 
 RegisterNUICallback('close', function(data, cb)
     SetNuiFocus(false, false)
