@@ -129,8 +129,10 @@ end)
 RegisterNUICallback('fetchPermission', function(data, cb)
     local permission_name = data.permission_name
 
-    local hasPermission = exports['nagodo-gangs']:DoesLocalPlayerHavePermissionInGang(permission_name)
+    print(permission_name)
 
+    local hasPermission = exports['nagodo-gangs']:DoesLocalPlayerHavePermissionInGang(permission_name)
+    print(hasPermission)
     cb(hasPermission)
 end)
 

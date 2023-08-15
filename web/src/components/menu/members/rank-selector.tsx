@@ -26,11 +26,25 @@ interface RankSelectorProps {
 }
 
 export function RankSelector(props: RankSelectorProps) {
+    const [hasPermission, setHasPermission] = useState<boolean>(false);
     const [selectedRankId, setSelectedRankId] = useState<number>(props.selectedRankId);
-    const [options, setOptions] = useState<IOption[]>([{id: 0, name: 'error'},{id: 0, name: 'error'},{id: 0, name: 'error'},{id: 0, name: 'error'},{id: 0, name: 'error'},{id: 0, name: 'error'}]);
+    const [options, setOptions] = useState<IOption[]>([]);
     const [open, setOpen] = useState(false);
 
+    async function fetchPermission() {
+        fetchNui<boolean>('fetchPermission', {permission_name: "manage_member"}).then(
+            (response) => {
+                console.log(response);
+                setOpen(false);
+                setHasPermission(response);
+            }
+        );
+    }
+
     function handleSelectorClick() {
+        if (!hasPermission) {
+            return;
+        }
         setOpen(!open);
     }
 
@@ -58,14 +72,25 @@ export function RankSelector(props: RankSelectorProps) {
     }
 
 
-    function Header(props: {open: boolean}) {
+    function Header(props: {open: boolean, hasPermission: boolean}) {
         let arrow = props.open ? "fa-solid fa-chevron-up": "fa-solid fa-chevron-down";
+
+        if (!props.hasPermission) {
+            return (
+                <div className='header'>
+                    <p className='selected-rank'>{getSelectedRankName(selectedRankId)}</p>
+                </div>
+            );
+            
+        }
+
         return (
             <div className='header' onClick={() => {handleSelectorClick()}}>
                 <p className='selected-rank'>{getSelectedRankName(selectedRankId)}</p>
                 <div className='arrow'>
                    <i className = {arrow}></i>
                 </div>
+                
             </div>
         )
     }
@@ -85,7 +110,9 @@ export function RankSelector(props: RankSelectorProps) {
     }
 
     useEffect(() => {
+        setHasPermission(false);
         fetchOptions();
+        fetchPermission();
     }, [])
 
     if (options === undefined || options === null || options.length === 0) {
@@ -99,7 +126,7 @@ export function RankSelector(props: RankSelectorProps) {
     if (open) {
         return (
             <div className="selector">
-                <Header open = {open} />
+                <Header open = {open} hasPermission = {hasPermission} />
                 <div className='options'>
                     {options.map((option) => {
                         return (
@@ -113,7 +140,7 @@ export function RankSelector(props: RankSelectorProps) {
 
     return (
         <div className="selector">
-            <Header open = {open} />
+            <Header open = {open} hasPermission = {hasPermission} />
         </div>
     )
 }
