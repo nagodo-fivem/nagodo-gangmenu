@@ -14,6 +14,37 @@ interface MemberEditingProps {
     member_id: string;
     stopEditing: Function;
     saveMember: Function;
+    KickMember: Function;
+}
+
+interface KickBtnProps {
+    text: string;
+    callback: Function;
+}
+
+function KickBtn(props: KickBtnProps) {
+    const [hasPermission, setHasPermission] = useState(true);
+
+    async function fetchPermission() {
+        fetchNui<boolean>('fetchPermission', {permission_name: "kick_member"}).then(
+            (response) => {
+                setHasPermission(response);
+            }
+        );
+    } 
+
+    useEffect(() => {
+        setHasPermission(true);      
+        fetchPermission();
+    }, [])
+    
+    if (!hasPermission) return null;
+
+    return (
+        <div className="action" onClick={() => {props.callback()}}>
+            <p>{_T(props.text)}</p>
+        </div>
+    );
 }
 
 export function MemberEditing(props: MemberEditingProps) {
@@ -39,6 +70,12 @@ export function MemberEditing(props: MemberEditingProps) {
             _memberData.current.rankId = id;
         }    
     }
+
+    function handleKickMember() {
+        if (_memberData.current !== undefined) {
+            props.KickMember(_memberData.current.id)
+        }
+    }
     
     if (memberData === undefined || memberData === null) {
         return (
@@ -62,6 +99,10 @@ export function MemberEditing(props: MemberEditingProps) {
 
             <div className="rank-selector">
                 <RankSelector selectedRankId = {memberData.rankId} updateMemberRank={updateMemberRank} />
+            </div>
+
+            <div className= "actions" >
+                <KickBtn text = "kick_member" callback = {handleKickMember} />
             </div>
 
             <div className = "main-btns">

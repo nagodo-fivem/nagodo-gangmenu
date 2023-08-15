@@ -60,6 +60,93 @@
   left: 50%;
   transform: translateX(-50%);
 }
+.members .addNewMember {
+  position: relative;
+  width: 100%;
+  height: 4vh;
+  background-color: var(--dark2);
+  margin-top: 0.5vh;
+  margin-bottom: 0.5vh;
+}
+.members .addNewMember .info {
+  position: absolute;
+  left: 1vh;
+  color: var(--white);
+  font-size: 1.8vh;
+  top: -0.8vh;
+}
+.members .addNewMember:hover {
+  cursor: pointer;
+  background-color: var(--dark3);
+}
+.members .newMemberInput {
+  position: relative;
+  margin-top: 1vh;
+  width: 100%;
+  height: 8vh;
+}
+.members .newMemberInput .changer {
+  width: 100%;
+  height: 100%;
+  background-color: var(--dark2);
+}
+.members .newMemberInput .changer .title {
+  position: absolute;
+  font-size: 1.8vh;
+  color: var(--white);
+  left: 1vh;
+  top: -0.8vh;
+}
+.members .newMemberInput .changer input {
+  position: absolute;
+  width: 39vh;
+  height: 3vh;
+  left: 1vh;
+  bottom: 1vh;
+  background-color: var(--dark3);
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-size: 1.7vh;
+  padding-left: 1vh;
+  padding-right: 1vh;
+}
+.members .main-btns {
+  position: absolute;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 4vh;
+  bottom: 1vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+.members .main-btns .btn {
+  position: relative;
+  width: 12vh;
+  height: 100%;
+  margin-left: 0.5vh;
+  margin-right: 0.5vh;
+  border-radius: 0.5vh;
+}
+.members .main-btns .btn.save {
+  background-color: var(--green);
+}
+.members .main-btns .btn.cancel {
+  background-color: var(--red);
+}
+.members .main-btns .btn:hover {
+  cursor: pointer;
+}
+.members .main-btns .btn p {
+  color: var(--white);
+  font-size: 1.7vh;
+  position: absolute;
+  top: -0.5vh;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 .member-editing {
   border-top: solid 0.4vh var(--dark2);
@@ -155,6 +242,31 @@
 .member-editing .editor .rank-selector .options .option:hover {
   background-color: var(--dark3);
   cursor: pointer;
+}
+.member-editing .editor .actions {
+  position: relative;
+  margin-top: 0.5vh;
+  width: 100%;
+  height: 10vh;
+  overflow: auto;
+}
+.member-editing .editor .actions .action {
+  position: relative;
+  width: 100%;
+  height: 4vh;
+  background-color: var(--dark2);
+  margin-bottom: 1vh;
+}
+.member-editing .editor .actions .action p {
+  position: absolute;
+  color: var(--white);
+  font-size: 1.6vh;
+  left: 1vh;
+  top: -0.5vh;
+}
+.member-editing .editor .actions .action:hover {
+  cursor: pointer;
+  background-color: var(--dark3);
 }
 .member-editing .editor .main-btns {
   position: absolute;

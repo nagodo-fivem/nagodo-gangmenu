@@ -27,7 +27,7 @@ interface RankSelectorProps {
 
 export function RankSelector(props: RankSelectorProps) {
     const [selectedRankId, setSelectedRankId] = useState<number>(props.selectedRankId);
-    const [options, setOptions] = useState<IOption[]>([]);
+    const [options, setOptions] = useState<IOption[]>([{id: 0, name: 'error'},{id: 0, name: 'error'},{id: 0, name: 'error'},{id: 0, name: 'error'},{id: 0, name: 'error'},{id: 0, name: 'error'}]);
     const [open, setOpen] = useState(false);
 
     function handleSelectorClick() {

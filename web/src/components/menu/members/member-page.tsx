@@ -20,10 +20,54 @@ interface IMember {
     rank: string;
 }
 
+function NewMemberInput(props: any) {
+    if (!props.active) return null;
+
+    function handleInputChange(event: any) {
+        props.callback(event.target.value);
+    }
+
+    return (
+        <div className='newMemberInput'>
+            <div className="changer">
+                <p className='title'>{_T("player_id")}</p>
+                <input type="number" className="name-input" value={props.addMemberId} onChange={handleInputChange} />
+            </div>
+        </div>
+    );
+}
+
+function AddNewMemberBtn(props: any) {
+    const [hasPermission, setHasPermission] = useState(true);
+
+    async function fetchPermission() {
+        fetchNui<boolean>('fetchPermission', {permission_name: "add_new_member"}).then(
+            (response) => {
+                setHasPermission(response);
+            }
+        );
+    } 
+
+    useEffect(() => {
+        setHasPermission(true);      
+        fetchPermission();
+    }, [])
+    
+    if (!hasPermission) return null;
+
+    return (
+        <div className='addNewMember' onClick={props.callback}>
+            <p className='info'>{_T('add_new_member')}</p>
+        </div>
+    )
+}
+
 export function MembersPage() {
     const [members, setMembers] = useState<IMember[]>([])
     const [editing, setEditing] = useState(false);
+    const [addingNewMember, setAddingNewMember] = useState(false);
     const [currentMemberId, setCurrentMemberId] = useState<string>("");
+    const [addMemberId, setAddMemberId] = useState<number>(-1);
 
     async function fetchMembers() {
         fetchNui<any>('fetchMembers').then(
@@ -55,6 +99,37 @@ export function MembersPage() {
         setEditing(false);
     }
 
+    function handleAddNewMemberBtn() {
+        setAddingNewMember(true);
+    }
+
+    function handleCancelAddMember() {
+        setAddingNewMember(false);
+    }   
+
+    function handleAcceptAddMember() {
+        setAddingNewMember(false);
+        fetchNui<any>('addNewMember', {member_id: addMemberId}).then(
+            (response) => {
+                setAddMemberId(-1);
+                fetchMembers();
+            }
+        );
+    }
+
+    function handleKickMember(member_id: number) {
+        fetchNui<any>('kickMember', {member_id: member_id}).then(
+            (response) => {
+                setEditing(false);
+                fetchMembers();
+            }
+        );
+    }
+
+    function handleInputChange(value: number) {
+        setAddMemberId(value);
+    }
+
     if (members === undefined || members === null || members.length === 0) {
         return (
             <div className="members">
@@ -66,14 +141,35 @@ export function MembersPage() {
     if (editing) {
         return (
             <div className="member-editing">
-                <MemberEditing stopEditing = {stopEditing} saveMember = {saveMember} member_id = {currentMemberId}  />
+                <MemberEditing KickMember={handleKickMember} stopEditing = {stopEditing} saveMember = {saveMember} member_id = {currentMemberId}  />
             </div>
             
         )
     }
 
+    if (addingNewMember) {
+        return (
+            <div className="members">
+                <NewMemberInput active = {addingNewMember} value = {addMemberId} callback = {handleInputChange}/>
+                <div className = "main-btns">
+
+                    <div className="cancel btn" onClick={() => {handleCancelAddMember()}}>
+                        <p className="text">Cancel</p>
+                    </div>
+
+                    <div className="save btn" onClick={() => {handleAcceptAddMember()}}>
+                        <p className="text">Add</p>
+                    </div>
+                
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="members">
+            <AddNewMemberBtn callback = {handleAddNewMemberBtn} />
+            
             {members.map((member, index) => {
                 return (
                     <Member key={index} name={member.name} rank={member.rank} member_id = {member.member_id} startEditing={startEditing} />

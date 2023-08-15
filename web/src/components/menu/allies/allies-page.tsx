@@ -133,7 +133,7 @@ export function AlliesPage() {
     }
 
 
-    if (allies === undefined || allies === null || allies.length === 0 && !isLoaded) {
+    if ((allies === undefined || allies === null || allies.length === 0) && !isLoaded) {
         return (
             <div className="allies">
                 <AddNewAlly callback={handleAddAlly} />

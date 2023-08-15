@@ -134,6 +134,23 @@ RegisterNUICallback('fetchPermission', function(data, cb)
     cb(hasPermission)
 end)
 
+
+RegisterNUICallback('addNewMember', function(data, cb)
+    local id = tonumber(data.member_id)
+
+    local done = exports['nagodo-gangs']:AddNewMember(id)
+
+    cb(done)
+end)
+
+RegisterNUICallback('kickMember', function(data, cb)
+    local id = tonumber(data.member_id)
+
+    local done = exports['nagodo-gangs']:KickMember(id)
+
+    cb(done)
+end)
+
 RegisterNUICallback('close', function(data, cb)
     SetNuiFocus(false, false)
     cb('ok')

@@ -81,6 +81,124 @@
             transform: translateX(-50%);
         }
     }
+
+    .addNewMember {
+        position: relative;
+
+        width: 100%;
+        height: 4vh;
+
+        background-color: var(--dark2);
+
+        margin-top: 0.5vh;
+        margin-bottom: 0.5vh;
+
+        .info {
+            position: absolute;            
+            left: 1vh;
+
+            color: var(--white);
+            font-size: 1.8vh;
+            top: -0.8vh;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background-color: var(--dark3);
+        }
+    }
+
+    .newMemberInput {
+        position: relative;
+    
+        margin-top: 1vh;
+
+        width: 100%;
+        height: 8vh;
+
+        .changer {
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark2);
+
+            .title {
+                position: absolute;
+                font-size: 1.8vh;
+                color: var(--white);
+                left: 1vh;
+                top: -0.8vh;
+            }
+
+       
+            input {
+                position: absolute;
+                width: 39vh;
+                height: 3vh;
+
+                left: 1vh;
+                bottom: 1vh;
+
+                background-color: var(--dark3);
+
+                border: none;
+                outline: none;
+
+                color: var(--white);
+                font-size: 1.7vh;
+                padding-left: 1vh;
+                padding-right: 1vh;
+            }
+        }
+
+    }
+
+    .main-btns {
+        position: absolute;
+
+        width: fit-content;
+        height: 4vh;
+
+        bottom: 1vh;
+        left: 50%;
+        transform: translateX(-50%);
+
+        display: flex;
+
+        .btn {
+            position: relative;
+
+            width: 12vh;
+            height: 100%;
+
+            margin-left: 0.5vh;
+            margin-right: 0.5vh;
+
+            border-radius: 0.5vh;
+
+            &.save {
+                background-color: var(--green);
+            }
+
+            &.cancel {
+                background-color: var(--red);
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            p {
+                color: var(--white);
+                font-size: 1.7vh;
+                position: absolute;
+
+                top: -0.5vh;
+                text-align: center;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
 }
 
 .member-editing {
@@ -201,6 +319,41 @@
                 }
             }
 
+        }
+
+        .actions {
+            position: relative;
+
+            margin-top: 0.5vh;
+
+            width: 100%;
+            height: 10vh;
+            
+            overflow: auto;
+
+            .action {
+                position: relative;
+
+                width: 100%;
+                height: 4vh;
+
+                background-color: var(--dark2);
+
+                margin-bottom: 1vh;
+
+                p {
+                    position: absolute;
+                    color: var(--white);
+                    font-size: 1.6vh;
+                    left: 1vh;
+                    top: -0.5vh;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: var(--dark3);
+                }
+            }
         }
 
         .main-btns {
