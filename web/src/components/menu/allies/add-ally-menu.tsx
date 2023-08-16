@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { AllySelector } from "./ally-selector";
+import { _T } from "../../../utils/translation";
 
 interface NewAllyData {
     gangIdentifier: string;
@@ -35,11 +36,11 @@ export function AddAllyMenu(props: AddAllyMenuProps) {
             <div className = "main-btns">
 
                 <div className="cancel btn" onClick={() => {props.stopAddingAlly()}}>
-                    <p className="text">Cancel</p>
+                    <p className="text">{_T('cancel')}</p>
                 </div>
 
                 <div className="send btn" onClick={() => {handleSendClick(_allyData.current.gangIdentifier)}}>
-                    <p className="text">Send request</p>
+                    <p className="text">{_T('send_request')}</p>
                 </div>
                 
             </div>

@@ -25,6 +25,23 @@ interface AddAllyProps {
 }
 
 function AddNewAlly(props: AddAllyProps) {
+    const [hasPermission, setHasPermission] = useState<boolean>(false);
+
+    async function fetchPermission() {
+        fetchNui<boolean>('fetchPermission', {permission_name: "manage_allies"}).then(
+            (response) => {
+                setHasPermission(response);
+            }
+        );
+    } 
+
+    useEffect(() => {
+        setHasPermission(true);      
+        fetchPermission();
+    }, [])
+
+    if (!hasPermission) return null;
+
     return (
         <div className="newally" onClick={() => {props.callback()}}>
             <p className='info name'>{_T('add_new_ally')}</p>
@@ -36,6 +53,15 @@ export function AlliesPage() {
     const [allies, setAllies] = useState<IAlly[]>([])
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [addingAlly, setAddingAlly] = useState<boolean>(false);
+    const [hasPermission, setHasPermission] = useState<boolean>(false);
+
+    async function fetchPermission() {
+        fetchNui<boolean>('fetchPermission', {permission_name: "manage_allies"}).then(
+            (response) => {
+                setHasPermission(response);
+            }
+        );
+    } 
 
     async function fetchAllies() {
         fetchNui<any>('fetchAllies').then(
@@ -65,11 +91,14 @@ export function AlliesPage() {
 
                 setAllies(allies);
                 setIsLoaded(true);
+
+                fetchPermission();
             }
         );
     }
 
     useEffect(() => {
+        setHasPermission(false);
         fetchAllies();
     }, [])
 
@@ -146,7 +175,7 @@ export function AlliesPage() {
         <div className="allies">
             <AddNewAlly callback={handleAddAlly}/>
             {allies.map((ally) => {
-                return <Ally key={ally.gangIdentifier} gangIdentifier = {ally.gangIdentifier} type={ally.type} name = {ally.name} handleAccept={acceptAlly} handleDeny={denyAlly} handleCancel={cancelRequest} handleRemove = {removeAlly}/>
+                return <Ally key={ally.gangIdentifier} hasPermission = {hasPermission} gangIdentifier = {ally.gangIdentifier} type={ally.type} name = {ally.name} handleAccept={acceptAlly} handleDeny={denyAlly} handleCancel={cancelRequest} handleRemove = {removeAlly}/>
             })}
                 
         </div>

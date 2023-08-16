@@ -7,15 +7,19 @@ interface AllyBtnsProps {
     handleDeny: Function;
     handleCancel: Function;
     handleRemove: Function;
+    hasPermission: boolean;
 }
 
 interface ButtonProps {
     text: string;
     color: string;
     callback: Function;
+    
 }
 
 function AllyBtns(props: AllyBtnsProps) {
+
+    if (!props.hasPermission) return null;
 
     function Button(_props: ButtonProps) {
         let classname = "button " + _props.color
@@ -52,6 +56,7 @@ function AllyBtns(props: AllyBtnsProps) {
 
 interface AllyProps {
     gangIdentifier: string;
+    hasPermission: boolean;
     type: number;
     name: string;
     handleAccept: Function;
@@ -76,7 +81,7 @@ export function Ally(props: AllyProps) {
         <div className="ally">
             <p className='info name'>{props.name}</p>
             <p className="info extra">{info}</p>
-            <AllyBtns type = {props.type} gangIdentifier = {props.gangIdentifier} handleAccept={props.handleAccept} handleCancel={props.handleCancel} handleDeny={props.handleDeny} handleRemove={props.handleRemove} />
+            <AllyBtns type = {props.type} hasPermission = {props.hasPermission} gangIdentifier = {props.gangIdentifier} handleAccept={props.handleAccept} handleCancel={props.handleCancel} handleDeny={props.handleDeny} handleRemove={props.handleRemove} />
         </div>
     )
 }

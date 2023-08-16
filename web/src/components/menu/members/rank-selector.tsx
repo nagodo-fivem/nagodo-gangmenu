@@ -18,6 +18,7 @@ function Option(props: OptionProps) {
 interface IOption {
     id: number;
     name: string;
+    selectable: boolean;
 }
 
 interface RankSelectorProps {
@@ -75,6 +76,8 @@ export function RankSelector(props: RankSelectorProps) {
     function Header(props: {open: boolean, hasPermission: boolean}) {
         let arrow = props.open ? "fa-solid fa-chevron-up": "fa-solid fa-chevron-down";
 
+        if (!props.hasPermission) return null;
+
         if (!props.hasPermission) {
             return (
                 <div className='header'>
@@ -105,6 +108,8 @@ export function RankSelector(props: RankSelectorProps) {
                 })
 
                 setOptions(options);
+
+                fetchPermission();
             }
         );
     }
@@ -112,7 +117,6 @@ export function RankSelector(props: RankSelectorProps) {
     useEffect(() => {
         setHasPermission(false);
         fetchOptions();
-        fetchPermission();
     }, [])
 
     if (options === undefined || options === null || options.length === 0) {
@@ -129,6 +133,8 @@ export function RankSelector(props: RankSelectorProps) {
                 <Header open = {open} hasPermission = {hasPermission} />
                 <div className='options'>
                     {options.map((option) => {
+                        if (!option.selectable) return null;
+
                         return (
                             <Option id= {option.id} name={option.name} onClick = {handleOptionClick} />
                         )

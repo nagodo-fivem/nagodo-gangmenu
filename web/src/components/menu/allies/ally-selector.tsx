@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchNui } from '../../../utils/fetchNui';
+import { _T } from '../../../utils/translation';
 
 interface OptionProps {
     identifier: string;
@@ -28,7 +29,7 @@ interface AllySelectorProps {
 export function AllySelector(props: AllySelectorProps) {
     const [options, setOptions] = useState<IOption[]>([{identifier: "oki", name: "OKI"},{identifier: "din mor1", name: "Dinmor 1"},{identifier: "din mor2", name: "Dinmor 2"}]);
     const [open, setOpen] = useState(false);
-    const [selectedGangIdentifier, setSelectedGangIdentifier] = useState<string>("Ikke valgt");
+    const [selectedGangIdentifier, setSelectedGangIdentifier] = useState<string>(_T('not_selected'));
 
 
     function handleSelectorClick() {
@@ -44,11 +45,11 @@ export function AllySelector(props: AllySelectorProps) {
     function getGangName(identifier: string) {
             
         if (options === undefined || options === null) {
-            return 'error';
+            return _T('error');
         }
 
-        if (selectedGangIdentifier === "Ikke valgt") {
-            return "Ikke valgt"
+        if (selectedGangIdentifier === _T('not_selected')) {
+            return _T('not_selected')
         }
 
         let option = options.find((option) => {
@@ -56,7 +57,7 @@ export function AllySelector(props: AllySelectorProps) {
         })
 
         if (option === undefined) {
-            return 'error';
+            return _T('error');
         }
 
         return option.name;
