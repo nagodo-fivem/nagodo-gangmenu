@@ -2,8 +2,91 @@
   border-top: solid 0.4vh var(--dark2);
   position: absolute;
   width: 100%;
-  height: 61vh;
+  height: 100%;
   top: 0vh;
+}
+.banking .action-menu {
+  position: relative;
+  margin-top: 0.5vh;
+  width: 100%;
+  height: 61vh;
+}
+.banking .action-menu .action-title {
+  position: relative;
+  height: 4vh;
+  width: 100%;
+  background-color: var(--dark2);
+  margin-bottom: 0.5vh;
+}
+.banking .action-menu .action-title .title {
+  position: absolute;
+  left: 1vh;
+  color: var(--white);
+  font-size: 1.8vh;
+  top: -0.8vh;
+}
+.banking .action-menu .input-field {
+  width: 100%;
+  height: 8vh;
+  position: relative;
+  background-color: var(--dark2);
+}
+.banking .action-menu .input-field .title {
+  position: absolute;
+  font-size: 1.8vh;
+  color: var(--white);
+  left: 1vh;
+  top: -0.8vh;
+}
+.banking .action-menu .input-field input {
+  position: absolute;
+  width: 39vh;
+  height: 3vh;
+  left: 1vh;
+  bottom: 1vh;
+  background-color: var(--dark3);
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-size: 1.7vh;
+  padding-left: 1vh;
+  padding-right: 1vh;
+}
+.banking .action-menu .main-btns {
+  position: absolute;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 4vh;
+  bottom: 1vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+.banking .action-menu .main-btns .btn {
+  position: relative;
+  width: 12vh;
+  height: 100%;
+  margin-left: 0.5vh;
+  margin-right: 0.5vh;
+  border-radius: 0.5vh;
+}
+.banking .action-menu .main-btns .btn.save {
+  background-color: var(--green);
+}
+.banking .action-menu .main-btns .btn.cancel {
+  background-color: var(--red);
+}
+.banking .action-menu .main-btns .btn:hover {
+  cursor: pointer;
+}
+.banking .action-menu .main-btns .btn p {
+  color: var(--white);
+  font-size: 1.7vh;
+  position: absolute;
+  top: -0.6vh;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .banking .accounts {
   width: 100%;
@@ -61,6 +144,10 @@
 .banking .actions .action.pressable:hover {
   background-color: var(--dark3);
   cursor: pointer;
+}
+.banking .actions .action.not-pressable:hover {
+  background-color: var(--dark3);
+  cursor: not-allowed;
 }
 .banking .loading {
   position: relative;
