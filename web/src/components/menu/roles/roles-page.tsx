@@ -19,6 +19,7 @@ interface IRole {
     id: number;
     name: string;
     playerAmount: number;
+    editable: boolean;
 }
 
 export function RolesPage() {
@@ -81,8 +82,9 @@ export function RolesPage() {
     return (
         <div className="roles">
             {roles.map((role) => {
+                
                 return (
-                    <Role id={role.id} name={role.name} playerAmount = {role.playerAmount} startEditing={startEditing} />
+                    <Role id={role.id} editable = {role.editable} name={role.name} playerAmount = {role.playerAmount} startEditing={startEditing} />
                 )
             })}
         </div>

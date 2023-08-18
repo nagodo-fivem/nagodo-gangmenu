@@ -129,10 +129,8 @@ end)
 RegisterNUICallback('fetchPermission', function(data, cb)
     local permission_name = data.permission_name
 
-    print(permission_name)
-
     local hasPermission = exports['nagodo-gangs']:DoesLocalPlayerHavePermissionInGang(permission_name)
-    print(hasPermission)
+ 
     cb(hasPermission)
 end)
 
@@ -151,6 +149,20 @@ RegisterNUICallback('kickMember', function(data, cb)
     local done = exports['nagodo-gangs']:KickMember(id)
 
     cb(done)
+end)
+
+RegisterNUICallback('fetchIsBoss', function(data, cb)
+    local Player = QBCore.Functions.GetPlayerData()
+    local gang = Player.gang
+   
+    local isBoss = gang.isboss
+    
+    if isBoss == nil then
+        isBoss = false
+    end
+
+    cb(isBoss)
+
 end)
 
 RegisterNUICallback('close', function(data, cb)

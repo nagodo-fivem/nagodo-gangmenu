@@ -22,17 +22,20 @@ interface PermissionProps {
     name: string;
     checked: boolean;
     checkMarkToggled: Function;
+    interactable: boolean;
 }
 
 function Permission(props: PermissionProps) {
 
     function handleToggle(checked: boolean) {
+        if (!props.interactable) return;
+
         props.checkMarkToggled(props.identifier, checked);
     }
 
     return (
         <div className="permission">
-            <PermissionCheckmark checked = {props.checked} checkMarkToggled = {handleToggle}/>
+            <PermissionCheckmark checked = {props.checked} checkMarkToggled = {handleToggle} hasPermission = {props.interactable}/>
             <p className='text'>{_T(props.name)}</p>
         </div>
     )
@@ -44,7 +47,22 @@ interface PermissionChangerProps {
 }
 
 export function PermissionChanger(props: PermissionChangerProps) {
-   
+    const [hasPermission, setHasPermission] = useState(false);
+
+    async function fetchPermission() {
+        fetchNui<boolean>('fetchIsBoss', {}).then(
+            (response) => {
+                console.log("Is booss: " + response);
+                setHasPermission(response);
+            }
+        );
+    } 
+
+    useEffect(() => {
+        setHasPermission(false);      
+        fetchPermission();
+    }, [])
+
     function sortedPermissions(permissions: Permission[]) {
         return permissions.sort((a, b) => {
             if (a.label < b.label) {
@@ -69,7 +87,7 @@ export function PermissionChanger(props: PermissionChangerProps) {
     return (
         <div className="changer">
             {sortedPermissions(props.permissions).map((permission) => (
-                <Permission identifier = {permission.identifier} name = {permission.label} checked = {permission.enabled} checkMarkToggled = {props.checkMarkToggled} />
+                <Permission identifier = {permission.identifier} interactable = {hasPermission} name = {permission.label} checked = {permission.enabled} checkMarkToggled = {props.checkMarkToggled} />
             ))}
         </div>
     )

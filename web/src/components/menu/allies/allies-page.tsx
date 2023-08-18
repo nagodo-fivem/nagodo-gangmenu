@@ -49,6 +49,15 @@ function AddNewAlly(props: AddAllyProps) {
     )
 }
 
+function NoAllies() {
+    return (
+        <div className="loading">
+            <p>{_T('no_allies')}</p>
+        </div>
+    )
+    
+}
+
 export function AlliesPage() {
     const [allies, setAllies] = useState<IAlly[]>([])
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -167,6 +176,15 @@ export function AlliesPage() {
             <div className="allies">
                 <AddNewAlly callback={handleAddAlly} />
                 <LoadingAllies />
+            </div>
+        )
+    }
+
+    if ((allies === undefined || allies === null || allies.length === 0) && isLoaded) {
+        return (
+            <div className="allies">
+                <AddNewAlly callback={handleAddAlly} />
+                <NoAllies />
             </div>
         )
     }

@@ -34,7 +34,7 @@ function KickBtn(props: KickBtnProps) {
     } 
 
     useEffect(() => {
-        setHasPermission(true);      
+        setHasPermission(false);      
         fetchPermission();
     }, [])
     
