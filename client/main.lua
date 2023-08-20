@@ -134,6 +134,14 @@ RegisterNUICallback('fetchPermission', function(data, cb)
     cb(hasPermission)
 end)
 
+RegisterNUICallback('fetchPermissions', function(data, cb)
+    local permissions = data.permissions
+    
+    local hasPermissionList = exports['nagodo-gangs']:DoesLocalPlayerHavePermissionsInGang(permissions)
+
+    cb(hasPermissionList)
+end)
+
 
 RegisterNUICallback('addNewMember', function(data, cb)
     local id = tonumber(data.member_id)
@@ -163,6 +171,36 @@ RegisterNUICallback('fetchIsBoss', function(data, cb)
 
     cb(isBoss)
 
+end)
+
+RegisterNUICallback('bankAction', function(data, cb)
+    local action = data.type
+    local value = data.value
+    local account = data.account
+    print(action, value, account)
+    local done = exports['nagodo-gangs']:BankAction(action, value, account)
+
+    cb(done)
+end)
+
+RegisterNUICallback('fetchAccounts', function(data, cb)
+    local accounts = exports['nagodo-gangs']:GetBankAccounts()
+
+    cb(accounts)
+end)
+
+RegisterNUICallback('addNewAccount', function(data, cb)
+    local accountName = data.account_name
+
+    local done = exports['nagodo-gangs']:AddNewBankAccount(accountName)
+    print(done)
+    cb(done)
+end)
+
+RegisterNUICallback('fetchAccountSeletorOptions', function(data, cb)
+    local accounts = exports['nagodo-gangs']:GetBankAccountSelectorOptions()
+
+    cb(accounts) 
 end)
 
 RegisterNUICallback('close', function(data, cb)

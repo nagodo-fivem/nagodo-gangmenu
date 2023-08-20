@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchNui } from '../../../utils/fetchNui';
+import { _T } from '../../../utils/translation';
 
 interface NameChangerProps {
     currentName: string;
@@ -28,7 +29,7 @@ export function NameChanger(props: NameChangerProps) {
 
     return (
         <div className="changer">
-            <p className='title'>Change role name</p>
+            <p className='title'>{_T('change_role_name')}</p>
             <input type="text" className="name-input" onChange={handleChange} readOnly = {!hasPermission} />
         </div>
     )

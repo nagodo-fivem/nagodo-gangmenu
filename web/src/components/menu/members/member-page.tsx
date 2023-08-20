@@ -53,7 +53,13 @@ function AddNewMemberBtn(props: any) {
         fetchPermission();
     }, [])
     
-    if (!hasPermission) return null;
+    if (!hasPermission) {
+        return (
+            <div className='addNewMember not-pressable'>
+                <p className='info'>{_T('add_new_member')}</p>
+            </div>
+        )
+    };
 
     return (
         <div className='addNewMember' onClick={props.callback}>
@@ -68,14 +74,29 @@ export function MembersPage() {
     const [addingNewMember, setAddingNewMember] = useState(false);
     const [currentMemberId, setCurrentMemberId] = useState<string>("");
     const [addMemberId, setAddMemberId] = useState<number>(-1);
+    const [manageMemberPermission, setManageMemberPermission] = useState<boolean>(true);
 
     async function fetchMembers() {
         fetchNui<any>('fetchMembers').then(
             (response) => {
+                
+                response.sort((a: any, b: any) => {
+                    if (a.rank < b.rank) {
+                        return -1;
+                    }
+                    if (a.rank > b.rank) {
+                        return 1;
+                    }
+                    return 0;
+                });
+
                 setMembers(response);
+
             }
         );
     }
+
+    
 
     useEffect(() => {
         fetchMembers();
@@ -154,11 +175,11 @@ export function MembersPage() {
                 <div className = "main-btns">
 
                     <div className="cancel btn" onClick={() => {handleCancelAddMember()}}>
-                        <p className="text">Cancel</p>
+                        <p className="text">{_T('cancel')}</p>
                     </div>
 
                     <div className="save btn" onClick={() => {handleAcceptAddMember()}}>
-                        <p className="text">Add</p>
+                        <p className="text">{_T('add')}</p>
                     </div>
                 
                 </div>
@@ -172,7 +193,7 @@ export function MembersPage() {
             
             {members.map((member, index) => {
                 return (
-                    <Member key={index} name={member.name} rank={member.rank} member_id = {member.member_id} startEditing={startEditing} />
+                    <Member key={index} name={member.name} rank={member.rank} member_id = {member.member_id} startEditing={startEditing} permission = {manageMemberPermission} />
                 )
             })}
         </div>

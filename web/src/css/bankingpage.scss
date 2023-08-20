@@ -71,6 +71,94 @@
             }
         }
 
+        .selector {
+            width: 100%;
+            height: auto;
+            position: relative;
+           
+            margin-bottom: 0.5vh;
+
+            .account-selector {
+                position: relative;
+    
+                margin-top: 0.5vh;
+    
+                width: 100%;
+                height: auto;
+                display: inline-block;
+    
+                .header {
+                    position: relative;
+                    height: 5vh;
+                    width: 100%;
+    
+                   
+                    background-color: var(--dark2);
+    
+                    &:hover {
+                        cursor: pointer;
+                    }
+    
+                    .selected-rank {
+                        position: absolute;
+                        top: 0vh;
+                        color: var(--white);
+                        font-size: 1.6vh;
+                        left: 1vh;
+                    }
+    
+                    .arrow {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        right: 2vh;
+    
+                        height: fit-content;
+                        width: fit-content;
+    
+                        i {
+                            color: var(--gray);
+                            font-size: 2vh;
+                        }
+                    }
+                }
+    
+                .options {
+                    position: relative;
+    
+                    width: 100%;
+                    height: auto;
+                    max-height: 30vh;
+                    margin-top: 1vh;
+                    overflow: auto;
+    
+                    .option {
+                        position: relative;
+                        height: 5vh;
+                        width: 100%;
+    
+                        display: inline-block;
+    
+                        background-color: var(--dark2);
+                        margin-bottom: 0.5vh;
+    
+                        .name {
+                            position: absolute;
+                            top: 0vh;
+                            color: var(--white);
+                            font-size: 1.6vh;
+                            left: 1vh;
+                        }
+    
+                        &:hover {
+                            background-color: var(--dark3);
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+
         .main-btns {
             position: absolute;
     
@@ -121,94 +209,218 @@
         
     }
    
-    .accounts {
+    .wrapper {
 
+        .accounts {
+            width: 100%;
+            height: auto;
+            
+            max-height: 40vh;
+            top: 0vh;
+            position: relative;
+    
+            overflow: auto;
+    
+            .add-new-account {
+                position: relative;
+    
+                width: 100%;
+                height: 4vh;
+    
+                background-color: var(--dark2);
+    
+                margin-top: 0.5vh;
+                margin-bottom: 0.5vh;
+    
+                p {
+                    position: absolute;            
+                    left: 1vh;
+    
+                    color: var(--white);
+                    font-size: 1.8vh;
+                    top: -0.8vh;
+                }
+    
+                &:hover {
+                    background-color: var(--dark3);
+                    cursor: pointer;
+                }
+                
+            }
+    
+            .account {
+                position: relative;
+    
+                width: 100%;
+                height: 7vh;
+    
+                background-color: var(--dark2);
+    
+                margin-top: 0.5vh;
+                margin-bottom: 0.5vh;
+    
+                .info {
+                    position: absolute;            
+                    left: 1vh;
+    
+                    &.name {
+                        color: var(--white);
+                        font-size: 1.8vh;
+                        top: -0.8vh;
+                    }
+    
+                    &.money {
+                        color: var(--gray);
+                        font-size: 1.5vh;
+                        top: 1.5vh;
+                    }
+                }
+    
+                
+            }
+    
+        }
+    
+        .actions {
+            position: relative;
+            margin-top: 1vh;
+            width: 100%;
+            height: fit-content;
+    
+           
+            .action {
+                position: relative;
+              
+                left: 50%;
+                transform: translateX(-50%);
+    
+                height: 5vh;
+                width: 100%;
+                margin-bottom: 0.5vh;
+    
+                background-color: var(--dark2);
+    
+                .text {
+                    position: absolute;
+    
+                    color: var(--white);
+    
+                    font-size: 2vh;
+                    top: -0.6vh;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+    
+                &.pressable {
+                    &:hover {
+                        background-color: var(--dark3);
+                        cursor: pointer;
+                    }
+                }
+    
+                &.not-pressable {
+                    &:hover {
+                        background-color: var(--dark3);
+                    }
+                }
+    
+            }
+        }
+    }
+
+    
+
+    .add-account-menu {
         width: 100%;
-        height: 40vh;
+        height: 100%;
 
         top: 0vh;
         position: absolute;
 
         overflow: auto;
 
-        .account {
-            position: relative;
-
+        .input-field {
             width: 100%;
-            height: 7vh;
-
+            height: 8vh;
+            margin-top: 0.5vh;
+            position: relative;
             background-color: var(--dark2);
 
-            margin-top: 0.5vh;
-            margin-bottom: 0.5vh;
-
-            .info {
-                position: absolute;            
+            .title {
+                position: absolute;
+                font-size: 1.8vh;
+                color: var(--white);
                 left: 1vh;
-
-                &.name {
-                    color: var(--white);
-                    font-size: 1.8vh;
-                    top: -0.8vh;
-                }
-
-                &.money {
-                    color: var(--gray);
-                    font-size: 1.5vh;
-                    top: 1.5vh;
-                }
+                top: -0.8vh;
             }
-
-            
+    
+       
+            input {
+                position: absolute;
+                width: 39vh;
+                height: 3vh;
+    
+                left: 1vh;
+                bottom: 1vh;
+    
+                background-color: var(--dark3);
+    
+                border: none;
+                outline: none;
+    
+                color: var(--white);
+                font-size: 1.7vh;
+                padding-left: 1vh;
+                padding-right: 1vh;
+            }
         }
 
-    }
-
-    .actions {
-        position: absolute;
-
-        width: 100%;
-        height: fit-content;
-
-        top: 41vh;    
-
-        .action {
+        .main-btns {
             position: relative;
-          
+         
+            width: fit-content;
+            height: 4vh;
+    
+            margin-top: 1vh;
             left: 50%;
             transform: translateX(-50%);
-
-            height: 5vh;
-            width: 100%;
-            margin-bottom: 0.5vh;
-
-            background-color: var(--dark2);
-
-            .text {
-                position: absolute;
-
-                color: var(--white);
-
-                font-size: 2vh;
-                top: -0.6vh;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-
-            &.pressable {
+    
+            display: flex;
+    
+            .btn {
+                position: relative;
+    
+                width: 12vh;
+                height: 100%;
+    
+                margin-left: 0.5vh;
+                margin-right: 0.5vh;
+    
+                border-radius: 0.5vh;
+    
+                &.save {
+                    background-color: var(--green);
+                }
+    
+                &.cancel {
+                    background-color: var(--red);
+                }
+    
                 &:hover {
-                    background-color: var(--dark3);
                     cursor: pointer;
                 }
-            }
-
-            &.not-pressable {
-                &:hover {
-                    background-color: var(--dark3);
-                    cursor: not-allowed;
+    
+                p {
+                    color: var(--white);
+                    font-size: 1.7vh;
+                    position: absolute;
+    
+                    top: -0.6vh;
+                    text-align: center;
+                    left: 50%;
+                    transform: translateX(-50%);
                 }
             }
-
         }
     }
 

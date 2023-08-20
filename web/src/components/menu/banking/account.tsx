@@ -3,15 +3,21 @@ import { _T } from "../../../utils/translation";
 interface AccountProps {
     name: string;
     money: number;
+    view: boolean;
 }
 
 export function Account(props: AccountProps) {
 
     function formatMoney(amount: number) {
+
+        if (!props.view) {
+            return _T('hiddenMoney');
+        }
+
         let amountString = _T('valuta');
         let formattedAmount = amount.toLocaleString();
         
-        let finalAmount = amountString.replace('%s', formattedAmount);
+        let finalAmount = amountString.replace('[money]', formattedAmount);
         return finalAmount;
     }
 

@@ -40,7 +40,13 @@ function AddNewAlly(props: AddAllyProps) {
         fetchPermission();
     }, [])
 
-    if (!hasPermission) return null;
+    if (!hasPermission) {
+        return (
+            <div className="newally not-pressable">
+                <p className='info name'>{_T('add_new_ally')}</p>
+            </div>
+        )
+    };
 
     return (
         <div className="newally" onClick={() => {props.callback()}}>

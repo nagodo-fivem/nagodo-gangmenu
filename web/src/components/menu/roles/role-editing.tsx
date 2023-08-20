@@ -64,7 +64,7 @@ export function RoleEditing(props: RoleEditingProps) {
     return (
         <div className='editor'>
             <div className="current-edit">
-                <p className="info name">Editing: {roleData.name}</p>
+                <p className="info name">{_T('editing') + roleData.name}</p>
             </div>
 
             <div className='name-changer'>
@@ -78,11 +78,11 @@ export function RoleEditing(props: RoleEditingProps) {
             <div className = "main-btns">
 
                 <div className="cancel btn" onClick={() => {props.stopEditing()}}>
-                    <p className="text">Cancel</p>
+                    <p className="text">{_T('cancel')}</p>
                 </div>
 
                 <div className="save btn" onClick={() => {props.saveRole(_roleData)}}>
-                    <p className="text">Save</p>
+                    <p className="text">{_T('save')}</p>
                 </div>
                 
             </div>

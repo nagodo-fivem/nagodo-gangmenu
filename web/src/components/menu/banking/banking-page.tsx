@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Account } from './account'
 
 import '../../../css/bankingpage.css'
 import { _T } from '../../../utils/translation';
 import { fetchNui } from '../../../utils/fetchNui';
+import { ActionMenu } from './action-menu';
+import { Action } from './action';
+import { AddNewAccount, AddNewAccountMenu } from './add-new-account';
 
 
 function LoadingAccounts() {
@@ -14,101 +17,49 @@ function LoadingAccounts() {
     )
 }
 
-interface ActionMenuProps {
-    type: string;
-    handleAccept: Function;
-    handleCancel: Function;
-}
-
-function ActionMenu(props: ActionMenuProps) {
-
-    let title = '';
-    if (props.type === 'deposit') {
-        title = _T('deposit_money');
-    }
-    else if (props.type === 'withdraw') {
-        title = _T('withdraw_money');
-    }
-    else if (props.type === 'transfer') {
-        title = _T('transfer_money');
-    }
-
-    return (
-        <div className="action-menu">
-            <div className='action-title'>
-                <p className='title'>{title}</p>
-            </div>
-            <div className='input-field'>
-                <p className='title'>{_T('amount')}</p>
-                <input type="number" className="amount-input" />
-            </div>
-
-            <div className = "main-btns">
-
-                <div className="cancel btn" onClick={() => {props.handleCancel()}}>
-                    <p className="text">{_T('cancel')}</p>
-                </div>
-
-                <div className="save btn" onClick={() => {props.handleAccept()}}>
-                    <p className="text">{_T('accept')}</p>
-                </div>
-                
-            </div>
-        </div> 
-    )
-}
-
-interface ActionProps {
-    text: string;
-    type: string;
-    hasPermission: boolean;
-    handleClick: Function;
-}
-
-function Action(props: ActionProps) {
-    
-    if (!props.hasPermission) {
-        return (
-            <div className="action not-pressable">
-                <p className='text'>{props.text}</p>
-            </div>
-        )
-    };
-
-    return (
-        <div className = 'action pressable' onClick={() => {props.handleClick(props.type)}}>
-            <p className='text'>{props.text}</p>
-        </div>
-    )
-}
 
 interface BankingPermissions {
     deposit: boolean;
     withdraw: boolean;
-    transfer: boolean;
+    view: boolean;
 }
 
 export function BankingPage() {
-    const [accounts, setAccounts] = useState<any[]>([{name: "Din mor", money: 10000},{name: "Din mor", money: 250000},{name: "Din mor", money: 10000},{name: "Din mor", money: 99999999999}])
-    const [permissions, setPermissions] = useState<BankingPermissions>({deposit: true, withdraw: true, transfer: true})
+    const [accounts, setAccounts] = useState<any[]>([])
+    const [permissions, setPermissions] = useState<BankingPermissions>({deposit: true, withdraw: true, view: false})
     const [actionMenu, setActionMenu] = useState<boolean>(false)
     const [actionType, setActionType] = useState<string>('')
+    const [addingNewAccount, setAddingNewAccount] = useState<boolean>(false)
+    const [newAccountName, setNewAccountName] = useState<string>('')
+    const [currentValue, setCurrentValue] = useState<number>(0)
+
+    let _selectedAccount = useRef<number>();
+
 
     async function fetchAccounts() {
         fetchNui('fetchAccounts', {}).then(
             (response) => {
                 setAccounts(response);
 
-                fetchPermissions();
+                fetchPermissions(["deposit_money", "withdraw_money", "view_money"]);
+
             }
         );
 
     }
 
-    async function fetchPermissions() {
-        fetchNui('fetchPermissions', {}).then(
+    async function fetchPermissions(_permissions: string[]) {
+        fetchNui('fetchPermissions', {permissions: _permissions}).then(
             (response) => {
-                setPermissions(response);
+                let _permissions = {...permissions};
+  
+                _permissions.deposit = response[0];
+            
+                _permissions.withdraw = response[1];
+            
+                _permissions.view = response[2];
+                
+                setPermissions(_permissions);
             }
         );
     }
@@ -117,13 +68,37 @@ export function BankingPage() {
         fetchAccounts();
     }, [])
 
+    function changeAccount(id: number) {
+        _selectedAccount.current = id;
+    }
+
+    function handleAddNewAccount() {
+        setAddingNewAccount(true);
+    }
+
+    function handleAddNewAccountAccept() {
+        fetchNui('addNewAccount', {account_name: newAccountName}).then(
+            (response) => {
+
+                fetchAccounts();
+                
+            }
+        );
+        setAddingNewAccount(false);
+    }
+
+    function handleAddNewAccountCancel() {
+        setAddingNewAccount(false);
+    }
+
     function handleActionClick(type: string) {
         setActionType(type);
         setActionMenu(true);
     }
 
     function handleActionAccept() {
-        fetchNui('bankAction', {type: actionType}).then(    
+       
+        fetchNui('bankAction', {type: actionType, value: currentValue, account: _selectedAccount.current}).then(    
             (response) => {
                 if (response) {
                     fetchAccounts();
@@ -138,6 +113,10 @@ export function BankingPage() {
         setActionMenu(false);
     }
 
+    function handleValueChange(value: number) {
+        setCurrentValue(value);
+    }
+
     if (accounts === undefined || accounts === null || accounts.length === 0) {
         return (
             <div className="banking">
@@ -146,26 +125,41 @@ export function BankingPage() {
         )
     }
 
+    if (addingNewAccount) {
+        return (
+            <div className='banking'>
+                
+                <AddNewAccountMenu handleAccept={handleAddNewAccountAccept} handleCancel={handleAddNewAccountCancel} handleInputChange = {setNewAccountName} />
+            </div>
+        )
+    }
+
     if (actionMenu) {
         return (
             <div className="banking">
-                <ActionMenu type = {actionType} handleCancel={handleActionCancel} handleAccept={handleActionAccept} />
+                <ActionMenu type = {actionType} handleCancel={handleActionCancel} handleAccept={handleActionAccept} changeValue={handleValueChange} changeAccount={changeAccount}/>
             </div>
         )
     }
 
     return (
         <div className="banking">
-            <div className="accounts">
-                {accounts.map((account) => {
-                    return <Account key={account.id} name = {account.name} money={account.money} />
-                })}
+           
+            <div className='wrapper'>
+                <div className="accounts">
+
+                    <AddNewAccount handleAddNewAccount={handleAddNewAccount} />
+
+                    {accounts.map((account) => {
+                        return <Account key={account.id} name = {account.name} money={account.money} view = {permissions.view}/>
+                    })}
+                </div>
+                <div className='actions'>
+                    <Action text = {_T('deposit_money')} type = "deposit" hasPermission = {permissions.deposit} handleClick={handleActionClick}/>
+                    <Action text = {_T('withdraw_money')} type = "withdraw" hasPermission = {permissions.withdraw} handleClick={handleActionClick}/>
+                </div>
             </div>
-            <div className='actions'>
-                <Action text = {_T('deposit_money')} type = "deposit" hasPermission = {permissions.deposit} handleClick={handleActionClick}/>
-                <Action text = {_T('withdraw_money')} type = "withdraw" hasPermission = {permissions.withdraw} handleClick={handleActionClick}/>
-                <Action text = {_T('transfer_money')} type = "transfer" hasPermission = {permissions.transfer} handleClick={handleActionClick}/>
-            </div>
+            
         </div>
     );
 }

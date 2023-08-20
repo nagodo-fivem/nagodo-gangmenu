@@ -1,3 +1,5 @@
+import { _T } from "../../../utils/translation";
+
 interface RoleProps {
     id: number;
     name: string;
@@ -12,7 +14,11 @@ export function Role(props: RoleProps) {
         props.startEditing(props.id);
     }
 
-    let editBtn = null;
+    let editBtn = (
+        <div className='edit-btn'>
+            <i className="fas fa-solid fa-edit not-pressable"></i>
+        </div>
+    );
 
     if (props.editable) {
         editBtn = (
@@ -25,7 +31,7 @@ export function Role(props: RoleProps) {
     return (
         <div className="role">
             <p className='info name'>{props.name}</p>
-            <p className='info extra'>Members: {props.playerAmount}</p>
+            <p className='info extra'>{_T('members') + props.playerAmount}</p>
 
             {editBtn}
             

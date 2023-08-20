@@ -35,7 +35,6 @@ export function RankSelector(props: RankSelectorProps) {
     async function fetchPermission() {
         fetchNui<boolean>('fetchPermission', {permission_name: "manage_member"}).then(
             (response) => {
-                console.log(response);
                 setOpen(false);
                 setHasPermission(response);
             }

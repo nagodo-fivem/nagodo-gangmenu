@@ -9,6 +9,9 @@
   --green: rgb(5, 94, 5);
   font-family: "Roboto", sans-serif;
 }
+*.not-pressable:hover {
+  cursor: not-allowed !important;
+}
 
 ::-webkit-scrollbar {
   display: none;
