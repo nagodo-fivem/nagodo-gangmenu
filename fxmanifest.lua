@@ -6,8 +6,8 @@ version '1.0.0'
 author 'Nagodo'
 
 shared_scripts {
-    'shared/exports.lua',
-    'shared/config.lua'
+    'shared/exports.lua'
+
 }
 
 client_scripts {
@@ -26,7 +26,7 @@ files {
 }
 
 escrow_ignore {
-    'shared/config.lua'
+    'shared/exports.lua'
 }
 
 lua54 'yes'
