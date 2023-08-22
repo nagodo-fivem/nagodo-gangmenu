@@ -16,7 +16,6 @@ client_scripts {
 
 server_scripts {
     'versioncheck.lua',
-    'server/main.lua',
 }
 
 ui_page 'web/build/index.html'
