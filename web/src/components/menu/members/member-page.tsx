@@ -139,6 +139,7 @@ export function MembersPage() {
     }
 
     function handleKickMember(member_id: number) {
+        console.log(member_id);
         fetchNui<any>('kickMember', {member_id: member_id}).then(
             (response) => {
                 setEditing(false);

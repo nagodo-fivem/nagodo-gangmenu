@@ -2,13 +2,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 local translationsSet = false
 
 function OpenMenu()
-    local Player = QBCore.Functions.GetPlayerData()
-    local gang = Player.gang.name
-
-    local hasPermission = exports['nagodo-gangs']:DoesLocalPlayerHavePermissionInGang("open_menu")
-
-    if not hasPermission then return end
-
+   
     if not translationsSet then
         local translations = exports['nagodo-gangs']:GetTranslations()
         SendNUIMessage({
@@ -152,7 +146,7 @@ RegisterNUICallback('addNewMember', function(data, cb)
 end)
 
 RegisterNUICallback('kickMember', function(data, cb)
-    local id = tonumber(data.member_id)
+    local id = data.member_id
 
     local done = exports['nagodo-gangs']:KickMember(id)
 
@@ -177,7 +171,7 @@ RegisterNUICallback('bankAction', function(data, cb)
     local action = data.type
     local value = data.value
     local account = data.account
-    print(action, value, account)
+   
     local done = exports['nagodo-gangs']:BankAction(action, value, account)
 
     cb(done)
@@ -193,7 +187,7 @@ RegisterNUICallback('addNewAccount', function(data, cb)
     local accountName = data.account_name
 
     local done = exports['nagodo-gangs']:AddNewBankAccount(accountName)
-    print(done)
+   
     cb(done)
 end)
 
